@@ -1,11 +1,14 @@
-import { goals, formatMAD } from "@/lib/data";
+import { ApiGoal } from "@/lib/api";
+import { formatMAD } from "@/lib/data";
 import { PlusCircle } from "lucide-react";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ProgressBar from "@/components/ui/ProgressBar";
 import IconBox from "@/components/ui/IconBox";
 
-export default function GoalCards() {
+type Props = { goals: ApiGoal[] };
+
+export default function GoalCards({ goals }: Props) {
   return (
     <div className="space-y-6">
       <SectionHeader
@@ -18,7 +21,9 @@ export default function GoalCards() {
 
       <div className="space-y-4">
         {goals.map((goal) => {
-          const pct = Math.round((goal.current / goal.target) * 100);
+          const current = parseFloat(goal.current);
+          const target = parseFloat(goal.target);
+          const pct = target > 0 ? Math.round((current / target) * 100) : 0;
           return (
             <Card key={goal.id} padding="sm" className="cursor-pointer transition-all hover:-translate-y-0.5">
               <div className="flex justify-between items-start mb-3">
@@ -34,13 +39,19 @@ export default function GoalCards() {
                 {goal.label}
               </p>
               <p className="mb-3" style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}>
-                {formatMAD(goal.current)} / {formatMAD(goal.target)} MAD
+                {formatMAD(current)} / {formatMAD(target)} MAD
               </p>
 
               <ProgressBar value={pct} color={goal.color} />
             </Card>
           );
         })}
+
+        {goals.length === 0 && (
+          <p className="text-sm text-center py-4" style={{ color: "var(--on-surface-variant)" }}>
+            Aucun objectif défini.
+          </p>
+        )}
       </div>
 
       {/* Promo card */}

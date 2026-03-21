@@ -1,18 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import { monthlyFlow } from "@/lib/data";
+import { ApiMonthlyFlow } from "@/lib/api";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import Button from "@/components/ui/Button";
 
-const periods = ["3M", "6M", "1A"] as const;
+const MONTH_LABELS: Record<string, string> = {
+  "01": "Jan", "02": "Fév", "03": "Mar", "04": "Avr",
+  "05": "Mai", "06": "Jun", "07": "Jul", "08": "Aoû",
+  "09": "Sep", "10": "Oct", "11": "Nov", "12": "Déc",
+};
 
-export default function CashFlowChart() {
-  const [period, setPeriod] = useState<"3M" | "6M" | "1A">("6M");
-  const data = period === "3M" ? monthlyFlow.slice(-3) : monthlyFlow;
-  const maxIncome = Math.max(...data.map((d) => d.income));
+function monthLabel(yyyyMM: string): string {
+  const mm = yyyyMM.slice(5, 7);
+  return MONTH_LABELS[mm] ?? yyyyMM;
+}
+
+const periods = ["3M", "6M", "1A"] as const;
+type Period = (typeof periods)[number];
+
+type Props = { data: ApiMonthlyFlow[] };
+
+export default function CashFlowChart({ data }: Props) {
+  const [period, setPeriod] = useState<Period>("6M");
+
+  const sliced =
+    period === "3M" ? data.slice(-3) :
+    period === "6M" ? data.slice(-6) :
+    data;
+
+  const maxIncome = Math.max(...sliced.map((d) => parseFloat(d.income)), 1);
 
   const legend = (
     <div className="flex items-center gap-4">
@@ -32,7 +51,7 @@ export default function CashFlowChart() {
             key={p}
             variant="ghost"
             size="sm"
-            onClick={() => setPeriod(p as typeof period)}
+            onClick={() => setPeriod(p)}
             style={{
               backgroundColor: period === p ? "var(--primary-container)" : "transparent",
               color: period === p ? "var(--primary)" : "var(--on-surface-variant)",
@@ -51,40 +70,48 @@ export default function CashFlowChart() {
     <Card padding="lg">
       <SectionHeader
         title="Évolution des Flux"
-        subtitle="Analyse comparative des 6 derniers mois"
+        subtitle="Analyse comparative des flux mensuels"
         action={legend}
         className="mb-8"
       />
 
-      <div className="h-64 flex items-end justify-between gap-4 px-4 relative">
-        <div className="absolute inset-x-0 top-0 h-full flex flex-col justify-between pointer-events-none">
-          {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="w-full h-px" style={{ backgroundColor: "var(--surface-container-high)" }} />
-          ))}
+      {sliced.length === 0 ? (
+        <div className="h-64 flex items-center justify-center" style={{ color: "var(--on-surface-variant)" }}>
+          <p className="text-sm">Aucune donnée disponible</p>
         </div>
+      ) : (
+        <div className="h-64 flex items-end justify-between gap-4 px-4 relative">
+          <div className="absolute inset-x-0 top-0 h-full flex flex-col justify-between pointer-events-none">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className="w-full h-px" style={{ backgroundColor: "var(--surface-container-high)" }} />
+            ))}
+          </div>
 
-        {data.map((d) => {
-          const incomeH = Math.round((d.income / maxIncome) * 130);
-          const expenseH = Math.round((d.expenses / maxIncome) * 130);
-          return (
-            <div key={d.month} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-              <div
-                className="w-full rounded-t-lg transition-colors"
-                style={{ height: `${expenseH}px`, backgroundColor: "#e2e8f0" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "#cbd5e1"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "#e2e8f0"; }}
-              />
-              <div
-                className="w-full rounded-t-lg transition-colors"
-                style={{ height: `${incomeH}px`, backgroundColor: "var(--primary-container)" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-container)"; }}
-              />
-              <EyebrowLabel>{d.month.toUpperCase().slice(0, 3)}</EyebrowLabel>
-            </div>
-          );
-        })}
-      </div>
+          {sliced.map((d) => {
+            const income = parseFloat(d.income);
+            const expenses = parseFloat(d.expenses);
+            const incomeH = Math.round((income / maxIncome) * 130);
+            const expenseH = Math.round((expenses / maxIncome) * 130);
+            return (
+              <div key={d.month} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
+                <div
+                  className="w-full rounded-t-lg transition-colors"
+                  style={{ height: `${expenseH}px`, backgroundColor: "#e2e8f0" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "#cbd5e1"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "#e2e8f0"; }}
+                />
+                <div
+                  className="w-full rounded-t-lg transition-colors"
+                  style={{ height: `${incomeH}px`, backgroundColor: "var(--primary-container)" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-container)"; }}
+                />
+                <EyebrowLabel>{monthLabel(d.month)}</EyebrowLabel>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </Card>
   );
 }

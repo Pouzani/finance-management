@@ -3,7 +3,13 @@ import Badge from "@/components/ui/Badge";
 import MetricCard from "@/components/ui/MetricCard";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 
-export default function BalanceSummary() {
+type Props = {
+  totalBalance: number;
+  monthlyIncome: number;
+  monthlyExpenses: number;
+};
+
+export default function BalanceSummary({ totalBalance, monthlyIncome, monthlyExpenses }: Props) {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Hero balance card — 8/12 */}
@@ -29,7 +35,7 @@ export default function BalanceSummary() {
                   color: "var(--on-primary)",
                 }}
               >
-                {formatMAD(128450)}{" "}
+                {formatMAD(totalBalance)}{" "}
                 <span style={{ fontSize: "1.5rem", fontWeight: 500 }}>MAD</span>
               </h2>
             </div>
@@ -49,14 +55,14 @@ export default function BalanceSummary() {
             <div>
               <EyebrowLabel light>Revenus (Ce mois)</EyebrowLabel>
               <p className="text-xl font-bold font-numeric mt-1" style={{ fontFamily: "var(--font-manrope), sans-serif" }}>
-                + {formatMAD(42500)}
+                + {formatMAD(monthlyIncome)}
               </p>
             </div>
             <div className="h-10 w-px self-center" style={{ backgroundColor: "rgba(255,255,255,0.2)" }} />
             <div>
               <EyebrowLabel light>Dépenses (Ce mois)</EyebrowLabel>
               <p className="text-xl font-bold font-numeric mt-1" style={{ fontFamily: "var(--font-manrope), sans-serif" }}>
-                - {formatMAD(18240)}
+                - {formatMAD(monthlyExpenses)}
               </p>
             </div>
           </div>
