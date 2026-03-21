@@ -2,24 +2,13 @@
 
 import { ApiTransaction } from "@/lib/api";
 import { formatMAD } from "@/lib/data";
-import { ShoppingCart, Banknote, Car, Coffee, Heart, TrendingUp, PiggyBank } from "lucide-react";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import IconBox from "@/components/ui/IconBox";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
-
-const categoryIcons: Record<string, { icon: React.ElementType; bg: string; color: string }> = {
-  Revenus: { icon: Banknote, bg: "var(--primary-container)", color: "var(--on-primary-container)" },
-  Alimentation: { icon: ShoppingCart, bg: "var(--tertiary-container)", color: "var(--on-tertiary-container)" },
-  Logement: { icon: Coffee, bg: "var(--secondary-container)", color: "var(--on-secondary-container)" },
-  Transport: { icon: Car, bg: "var(--secondary-container)", color: "var(--on-secondary-container)" },
-  Loisirs: { icon: Coffee, bg: "#fce7f3", color: "#9d174d" },
-  Santé: { icon: Heart, bg: "#dcfce7", color: "#166534" },
-  Épargne: { icon: PiggyBank, bg: "var(--tertiary-container)", color: "var(--on-tertiary-container)" },
-  Investissements: { icon: TrendingUp, bg: "var(--primary-container)", color: "var(--on-primary-container)" },
-};
+import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from "@/lib/categoryIcons";
 
 type Props = { transactions: ApiTransaction[] };
 
@@ -51,7 +40,7 @@ export default function TransactionTable({ transactions }: Props) {
           <tbody>
             {transactions.map((tx) => {
               const categoryName = tx.category_detail?.name ?? "";
-              const cat = categoryIcons[categoryName] ?? { icon: Coffee, bg: "var(--surface-container)", color: "var(--on-surface-variant)" };
+              const cat = categoryIcons[categoryName] ?? DEFAULT_ICON;
               const Icon = cat.icon;
               const amount = Math.abs(parseFloat(tx.amount));
               return (
