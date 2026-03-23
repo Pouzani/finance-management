@@ -38,14 +38,16 @@ export default async function DashboardPage() {
       {/* Main scrollable content */}
       <div className="flex-1 overflow-y-auto p-8 space-y-8 min-w-0">
         {/* Balance hero */}
-        <BalanceSummary
-          totalBalance={totalBalance}
-          monthlyIncome={monthlyIncome}
-          monthlyExpenses={monthlyExpenses}
-        />
+        <div className="anim-enter">
+          <BalanceSummary
+            totalBalance={totalBalance}
+            monthlyIncome={monthlyIncome}
+            monthlyExpenses={monthlyExpenses}
+          />
+        </div>
 
         {/* Charts */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 anim-enter anim-delay-1">
           <div className="lg:col-span-2">
             <CashFlowChart data={monthlyFlow} />
           </div>
@@ -55,7 +57,9 @@ export default async function DashboardPage() {
         </section>
 
         {/* Transactions */}
-        <TransactionTable transactions={txPage.results} />
+        <div className="anim-enter anim-delay-2">
+          <TransactionTable transactions={txPage.results} />
+        </div>
       </div>
 
       {/* Right panel */}
@@ -63,8 +67,10 @@ export default async function DashboardPage() {
         className="hidden xl:flex flex-col w-96 shrink-0 p-8 space-y-0 overflow-y-auto"
         style={{ backgroundColor: "var(--surface-container-low)" }}
       >
-        <QuickTransaction accounts={accounts} categories={categories} />
-        <div className="mt-8">
+        <div className="anim-enter anim-delay-2">
+          <QuickTransaction accounts={accounts} categories={categories} />
+        </div>
+        <div className="mt-8 anim-enter anim-delay-3">
           <GoalCards goals={goals} />
         </div>
       </aside>

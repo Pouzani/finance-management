@@ -1,5 +1,6 @@
 import Sidebar from "@/components/layout/Sidebar";
 import TopBar from "@/components/layout/TopBar";
+import AuthGuard from "@/components/AuthGuard";
 
 export default function DashboardLayout({
   children,
@@ -16,7 +17,7 @@ export default function DashboardLayout({
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         <TopBar />
         <div className="flex-1 overflow-hidden flex">
-          {children}
+          <AuthGuard>{children}</AuthGuard>
         </div>
       </div>
     </div>

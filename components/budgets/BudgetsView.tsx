@@ -1,148 +1,98 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Pencil, Check, X, AlertTriangle, TrendingDown } from "lucide-react";
-import { ApiCategory, ApiTransaction, getTransactions } from "@/lib/api";
+import {
+  ApiCategory,
+  ApiBudget,
+  createBudget,
+  updateBudget,
+  deleteBudget,
+} from "@/lib/api";
 import { formatMAD } from "@/lib/data";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import ProgressBar from "@/components/ui/ProgressBar";
 import Badge from "@/components/ui/Badge";
 import { CATEGORY_ICONS, DEFAULT_ICON } from "@/lib/categoryIcons";
 
-// ── Constants ────────────────────────────────────────────────────────────────
-
-const BUDGET_KEY = "finance-budgets-v1";
-
-type BudgetMap = Record<string, number>; // category name → MAD limit
-
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
-function computeSpend(txs: ApiTransaction[]): Record<string, number> {
-  const result: Record<string, number> = {};
-  for (const tx of txs) {
-    const name = tx.category_detail?.name ?? "";
-    if (name) result[name] = (result[name] ?? 0) + Math.abs(parseFloat(tx.amount));
-  }
-  return result;
-}
-
-function healthColor(pct: number): string {
-  if (pct >= 100) return "var(--error)";
-  if (pct >= 80) return "#f59e0b";
-  return "var(--primary)";
-}
-
 // ── Props ─────────────────────────────────────────────────────────────────────
 
 type Props = {
   categories: ApiCategory[];
-  initialTransactions: ApiTransaction[];
-  initialTotal: number;
-  monthStart: string;
-  monthEnd: string;
-  monthLabel: string;
+  budgets: ApiBudget[];
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function BudgetsView({
-  categories,
-  initialTransactions,
-  initialTotal,
-  monthStart,
-  monthEnd,
-  monthLabel,
-}: Props) {
-  const [transactions, setTransactions] = useState(initialTransactions);
-  const [loadingMore, setLoadingMore] = useState(
-    initialTotal > initialTransactions.length
-  );
-  const [budgets, setBudgets] = useState<BudgetMap>({});
-  const [editState, setEditState] = useState<{ cat: string; value: string } | null>(null);
+export default function BudgetsView({ categories, budgets }: Props) {
+  const router = useRouter();
+  const [editState, setEditState] = useState<{ cat: ApiCategory; value: string } | null>(null);
+  const [saving, setSaving] = useState(false);
   const editInputRef = useRef<HTMLInputElement>(null);
-  const initialTxRef = useRef(initialTransactions);
 
-  // Load budgets from localStorage
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(BUDGET_KEY);
-      if (raw) setBudgets(JSON.parse(raw) as BudgetMap);
-    } catch {}
-  }, []);
-
-  // Fetch remaining transaction pages if needed
-  useEffect(() => {
-    if (initialTotal <= initialTxRef.current.length) return;
-    let cancelled = false;
-    async function fetchRemaining() {
-      const all = [...initialTxRef.current];
-      let p = 2;
-      while (!cancelled) {
-        const result = await getTransactions({
-          type: "expense",
-          start_date: monthStart,
-          end_date: monthEnd,
-          page: String(p),
-        }).catch(() => null);
-        if (!result || !result.results.length) break;
-        all.push(...result.results);
-        if (!result.next) break;
-        p++;
-      }
-      if (!cancelled) {
-        setTransactions(all);
-        setLoadingMore(false);
-      }
-    }
-    fetchRemaining();
-    return () => { cancelled = true; };
-  }, [initialTotal, monthStart, monthEnd]);
-
-  // Focus edit input when it opens
   useEffect(() => {
     if (editState) editInputRef.current?.focus();
   }, [editState]);
 
+  // Map category id → budget for O(1) lookup
+  const budgetByCatId = new Map(budgets.map((b) => [b.category.id, b]));
+
+  // Month label — from current date (all categories share the same calendar month)
+  const monthLabel = new Date().toLocaleDateString("fr-MA", {
+    month: "long",
+    year: "numeric",
+  });
+
+  // Aggregate totals from API data
+  const totalBudget = budgets.reduce((s, b) => s + parseFloat(b.amount_limit), 0);
+  const totalSpent = budgets.reduce((s, b) => s + parseFloat(b.spent), 0);
+  const totalRemaining = budgets.reduce((s, b) => s + parseFloat(b.remaining), 0);
+  const overallPct = totalBudget > 0
+    ? Math.min(Math.round((totalSpent / totalBudget) * 100), 999)
+    : 0;
+  const overCount = budgets.filter((b) => parseFloat(b.remaining) < 0).length;
+  const budgetsSet = budgets.length;
+
   // ── Budget mutations ──────────────────────────────────────────────────────
 
-  function saveBudget(catName: string, value: number) {
-    const next = { ...budgets, [catName]: value };
-    setBudgets(next);
-    localStorage.setItem(BUDGET_KEY, JSON.stringify(next));
+  function startEdit(cat: ApiCategory) {
+    const existing = budgetByCatId.get(cat.id);
+    setEditState({ cat, value: existing ? existing.amount_limit : "" });
   }
 
-  function startEdit(catName: string) {
-    setEditState({ cat: catName, value: budgets[catName] ? String(budgets[catName]) : "" });
-  }
-
-  function commitEdit(catName: string) {
-    const val = parseFloat(editState?.value ?? "");
-    if (!isNaN(val) && val >= 0) saveBudget(catName, val);
-    setEditState(null);
+  async function commitEdit() {
+    if (!editState) return;
+    const val = parseFloat(editState.value);
+    const existing = budgetByCatId.get(editState.cat.id);
+    setSaving(true);
+    try {
+      if (isNaN(val) || val === 0) {
+        if (existing) await deleteBudget(existing.id);
+      } else if (existing) {
+        await updateBudget(existing.id, { amount_limit: val.toFixed(2) });
+      } else {
+        await createBudget({
+          category: editState.cat.id,
+          amount_limit: val.toFixed(2),
+          start_day: 1,
+          rollover: false,
+        });
+      }
+      router.refresh();
+    } catch {
+      // mutation failed — state will remain stale until next refresh
+    } finally {
+      setSaving(false);
+      setEditState(null);
+    }
   }
 
   function cancelEdit() {
     setEditState(null);
   }
-
-  // ── Computed values ───────────────────────────────────────────────────────
-
-  const spend = useMemo(() => computeSpend(transactions), [transactions]);
-
-  const totalBudget = categories.reduce(
-    (s, c) => s + (budgets[c.name] ?? 0), 0
-  );
-  const totalSpent = categories.reduce(
-    (s, c) => s + (spend[c.name] ?? 0), 0
-  );
-  const totalRemaining = totalBudget - totalSpent;
-  const overallPct = totalBudget > 0
-    ? Math.min(Math.round((totalSpent / totalBudget) * 100), 999)
-    : 0;
-  const overCount = categories.filter(
-    (c) => budgets[c.name] && spend[c.name] > budgets[c.name]
-  ).length;
-  const budgetsSet = categories.filter((c) => budgets[c.name] > 0).length;
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -168,11 +118,6 @@ export default function BudgetsView({
           </div>
           <div className="text-right">
             <EyebrowLabel>{monthLabel}</EyebrowLabel>
-            {loadingMore && (
-              <p style={{ fontSize: "10px", color: "var(--on-surface-variant)", marginTop: "4px" }}>
-                Calcul en cours…
-              </p>
-            )}
           </div>
         </div>
 
@@ -322,17 +267,18 @@ export default function BudgetsView({
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {categories.map((cat, idx) => {
-            const catSpend = spend[cat.name] ?? 0;
-            const limit = budgets[cat.name] ?? 0;
-            const hasLimit = limit > 0;
-            const pct = hasLimit ? Math.min(Math.round((catSpend / limit) * 100), 999) : 0;
+            const budget = budgetByCatId.get(cat.id);
+            const hasLimit = !!budget;
+            const limit = hasLimit ? parseFloat(budget.amount_limit) : 0;
+            const catSpend = hasLimit ? parseFloat(budget.spent) : 0;
+            const pct = hasLimit ? Math.min(Math.round(budget.utilization_pct), 999) : 0;
             const status = hasLimit
               ? pct >= 100 ? "over" : pct >= 80 ? "warning" : "good"
               : "unset";
             const iconDef = CATEGORY_ICONS[cat.name] ?? DEFAULT_ICON;
             const Icon = iconDef.icon;
             const barColor = status === "over" ? "var(--error)" : status === "warning" ? "#f59e0b" : "var(--primary)";
-            const isEditing = editState?.cat === cat.name;
+            const isEditing = editState?.cat.id === cat.id;
             const delayClass = `anim-delay-${Math.min(idx + 1, 6)}`;
 
             return (
@@ -392,8 +338,8 @@ export default function BudgetsView({
                           {pct}% utilisé
                         </span>
                         <span style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}>
-                          {formatMAD(limit - catSpend)} MAD{" "}
-                          {catSpend <= limit ? "restants" : "dépassés"}
+                          {formatMAD(Math.abs(parseFloat(budget.remaining)))} MAD{" "}
+                          {parseFloat(budget.remaining) >= 0 ? "restants" : "dépassés"}
                         </span>
                       </div>
                       <ProgressBar value={pct} color={barColor} />
@@ -437,48 +383,53 @@ export default function BudgetsView({
                       </span>
                       {isEditing ? (
                         <div className="flex items-center gap-1">
-                          <input
+                          <Input
                             ref={editInputRef}
                             type="text"
                             value={editState?.value ?? ""}
                             onChange={(e) => setEditState((s) => s ? { ...s, value: e.target.value } : s)}
                             onKeyDown={(e) => {
-                              if (e.key === "Enter") commitEdit(cat.name);
+                              if (e.key === "Enter") commitEdit();
                               if (e.key === "Escape") cancelEdit();
                             }}
-                            className="rounded-lg px-2 py-1 text-right font-bold font-numeric outline-none"
+                            disabled={saving}
+                            className="font-bold font-numeric text-right"
                             style={{
                               fontSize: "12px",
                               fontFamily: "var(--font-manrope), sans-serif",
                               width: "90px",
-                              backgroundColor: "var(--surface-container)",
-                              color: "var(--on-surface)",
                               border: "2px solid rgba(22,105,105,0.20)",
+                              opacity: saving ? 0.5 : 1,
+                              padding: "4px 8px",
                             }}
                             aria-label={`Budget pour ${cat.name} en MAD`}
                           />
-                          <button
-                            onClick={() => commitEdit(cat.name)}
+                          <Button
+                            variant="ghost"
+                            onClick={commitEdit}
+                            disabled={saving}
                             aria-label="Confirmer"
                             className="p-1 rounded-lg"
-                            style={{ color: "var(--primary)", background: "none", border: "none", cursor: "pointer" }}
+                            style={{ color: "var(--primary)" }}
                           >
                             <Check size={13} strokeWidth={2.5} />
-                          </button>
-                          <button
+                          </Button>
+                          <Button
+                            variant="ghost"
                             onClick={cancelEdit}
+                            disabled={saving}
                             aria-label="Annuler"
                             className="p-1 rounded-lg"
-                            style={{ color: "var(--on-surface-variant)", background: "none", border: "none", cursor: "pointer" }}
+                            style={{ color: "var(--on-surface-variant)" }}
                           >
                             <X size={13} />
-                          </button>
+                          </Button>
                         </div>
                       ) : (
-                        <button
-                          onClick={() => startEdit(cat.name)}
+                        <Button
+                          variant="ghost"
+                          onClick={() => startEdit(cat)}
                           className="flex items-center gap-1.5 group/edit"
-                          style={{ background: "none", border: "none", cursor: "pointer" }}
                           aria-label={`Modifier le budget pour ${cat.name}`}
                         >
                           {hasLimit ? (
@@ -509,7 +460,7 @@ export default function BudgetsView({
                             className="opacity-0 group-hover/edit:opacity-100 transition-opacity"
                             style={{ color: "var(--on-surface-variant)" }}
                           />
-                        </button>
+                        </Button>
                       )}
                     </div>
                   </div>

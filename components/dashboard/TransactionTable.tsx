@@ -78,11 +78,11 @@ export default function TransactionTable({ transactions }: Props) {
                     </span>
                   </td>
                   <td className="px-8 py-5 text-center">
-                    <button className="p-2 opacity-0 group-hover:opacity-100 transition-opacity rounded-full" style={{ color: "var(--on-surface-variant)" }}>
+                    <Button variant="ghost" className="p-2 opacity-0 group-hover:opacity-100 transition-opacity rounded-full" style={{ color: "var(--on-surface-variant)" }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
                       </svg>
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               );

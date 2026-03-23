@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus, X, ChevronDown, Loader2, Check } from "lucide-react";
 import { ApiAccount, ApiCategory, createTransaction } from "@/lib/api";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 
 type Props = {
@@ -141,26 +142,15 @@ export default function AddTransactionDrawer({
               Nouvelle Transaction
             </h2>
           </div>
-          <button
+          <Button
+            variant="ghost"
             onClick={handleClose}
             aria-label="Fermer"
-            className="p-2 rounded-xl transition-colors"
-            style={{
-              color: "var(--on-surface-variant)",
-              border: "none",
-              background: "none",
-              cursor: "pointer",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor =
-                "var(--surface-container)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = "transparent";
-            }}
+            className="p-2 rounded-xl"
+            style={{ color: "var(--on-surface-variant)" }}
           >
             <X size={18} />
-          </button>
+          </Button>
         </div>
 
         {/* Form */}
@@ -219,18 +209,19 @@ export default function AddTransactionDrawer({
               >
                 MAD
               </span>
-              <input
+              <Input
                 id="drawer-amount"
                 type="text"
                 placeholder="0.00"
                 value={formAmount}
                 onChange={(e) => setFormAmount(e.target.value)}
-                className="w-full rounded-2xl pl-14 pr-5 py-5 text-3xl font-black text-right outline-none font-numeric"
+                className="w-full font-black text-right font-numeric"
                 style={{
                   fontFamily: "var(--font-manrope), sans-serif",
-                  backgroundColor: "var(--surface-container)",
                   border: "none",
-                  color: "var(--on-surface)",
+                  fontSize: "30px",
+                  padding: "20px 20px 20px 56px",
+                  borderRadius: "1rem",
                 }}
               />
             </div>
@@ -244,18 +235,14 @@ export default function AddTransactionDrawer({
             >
               <EyebrowLabel>Libellé</EyebrowLabel>
             </label>
-            <input
+            <Input
               id="drawer-label"
               type="text"
               placeholder="Ex : Salaire, Loyer, Carrefour…"
               value={formLabel}
               onChange={(e) => setFormLabel(e.target.value)}
-              className="w-full rounded-xl px-4 py-3 text-sm outline-none"
-              style={{
-                backgroundColor: "var(--surface-container)",
-                border: "none",
-                color: "var(--on-surface)",
-              }}
+              className="w-full text-sm"
+              style={{ border: "none", padding: "12px 16px" }}
             />
           </div>
 

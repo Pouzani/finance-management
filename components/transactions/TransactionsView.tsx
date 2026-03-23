@@ -5,6 +5,7 @@ import {
   Search, Plus, X, Loader2, SlidersHorizontal,
   ChevronDown, MoreHorizontal,
 } from "lucide-react";
+import Input from "@/components/ui/Input";
 import {
   ApiTransaction, ApiAccount, ApiCategory,
   getTransactions,
@@ -261,27 +262,28 @@ export default function TransactionsView({
               className="absolute left-3 top-1/2 -translate-y-1/2"
               style={{ color: "var(--on-surface-variant)" }}
             />
-            <input
+            <Input
               type="text"
               placeholder="Rechercher une transaction…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl pl-9 pr-9 py-2.5 text-sm outline-none"
+              className="w-full text-sm"
               style={{
                 backgroundColor: "var(--surface-container-lowest)",
-                color: "var(--on-surface)",
                 border: "none",
+                padding: "10px 36px",
               }}
             />
             {search && (
-              <button
+              <Button
+                variant="ghost"
                 onClick={() => setSearch("")}
                 aria-label="Effacer la recherche"
                 className="absolute right-3 top-1/2 -translate-y-1/2"
-                style={{ color: "var(--on-surface-variant)", border: "none", background: "none", cursor: "pointer" }}
+                style={{ color: "var(--on-surface-variant)", padding: "0" }}
               >
                 <X size={12} />
-              </button>
+              </Button>
             )}
           </div>
 
@@ -504,21 +506,14 @@ export default function TransactionsView({
                         </div>
 
                         {/* Actions */}
-                        <button
+                        <Button
+                          variant="ghost"
                           aria-label={`Actions pour ${tx.label}`}
                           className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg shrink-0"
-                          style={{ color: "var(--on-surface-variant)", border: "none", background: "none", cursor: "pointer" }}
-                          onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLElement).style.backgroundColor =
-                              "var(--surface-container)";
-                          }}
-                          onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLElement).style.backgroundColor =
-                              "transparent";
-                          }}
+                          style={{ color: "var(--on-surface-variant)" }}
                         >
                           <MoreHorizontal size={14} />
-                        </button>
+                        </Button>
                       </div>
                     );
                   })}
@@ -531,7 +526,8 @@ export default function TransactionsView({
         {/* Load more */}
         {hasMore && !loading && (
           <div className="flex justify-center pt-2">
-            <button
+            <Button
+              variant="ghost"
               onClick={() => {
                 const nextPage = page + 1;
                 setPage(nextPage);
@@ -540,27 +536,16 @@ export default function TransactionsView({
                   page: nextPage, append: true,
                 });
               }}
-              className="px-6 py-3 rounded-2xl font-bold transition-colors"
+              className="px-6 py-3 rounded-2xl"
               style={{
-                fontSize: "12px",
-                fontFamily: "var(--font-manrope), sans-serif",
                 backgroundColor: "var(--surface-container)",
                 color: "var(--on-surface-variant)",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "var(--surface-container-high)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "var(--surface-container)";
+                fontSize: "12px",
               }}
             >
               Charger {total - transactions.length} transaction
               {total - transactions.length !== 1 ? "s" : ""} de plus
-            </button>
+            </Button>
           </div>
         )}
       </div>
