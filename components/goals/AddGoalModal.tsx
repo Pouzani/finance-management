@@ -221,6 +221,7 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
             variant="primary"
             size="lg"
             onClick={handleSubmit}
+            loading={creating}
             disabled={creating || !form.label.trim() || !form.target}
             className="w-full disabled:opacity-40"
             style={{ justifyContent: "center", letterSpacing: "0.04em" }}

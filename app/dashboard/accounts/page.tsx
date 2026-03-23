@@ -1,10 +1,7 @@
-export default function AccountsPage() {
-  return (
-    <div className="p-6">
-      <h1 style={{ fontFamily: "var(--font-manrope), sans-serif", color: "var(--on-surface)", fontSize: "1.5rem", fontWeight: 700 }}>
-        Accounts
-      </h1>
-      <p style={{ color: "var(--on-surface-variant)", marginTop: "0.5rem" }}>Page en construction.</p>
-    </div>
-  );
+import { getAccounts } from "@/lib/api";
+import AccountsView from "@/components/accounts/AccountsView";
+
+export default async function AccountsPage() {
+  const accounts = await getAccounts().catch(() => []);
+  return <AccountsView accounts={accounts} />;
 }

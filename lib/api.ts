@@ -214,6 +214,28 @@ export async function deleteGoal(id: string): Promise<void> {
   return del(`/goals/${id}/`);
 }
 
+// ── Account write endpoints ───────────────────────────────────────────────────
+
+export type CreateAccountInput = {
+  name: string;
+  balance?: string;
+};
+
+export async function createAccount(body: CreateAccountInput): Promise<ApiAccount> {
+  return mutate<ApiAccount>("/accounts/", "POST", body);
+}
+
+export async function updateAccount(
+  id: string,
+  body: CreateAccountInput
+): Promise<ApiAccount> {
+  return mutate<ApiAccount>(`/accounts/${id}/`, "PUT", body);
+}
+
+export async function deleteAccount(id: string): Promise<void> {
+  return del(`/accounts/${id}/`);
+}
+
 // ── Transaction write endpoints ──────────────────────────────────────────────
 
 export type CreateTransactionInput = {

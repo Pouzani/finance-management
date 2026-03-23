@@ -33,6 +33,14 @@ export default async function DashboardPage() {
   const monthlyIncome = latestMonth ? parseFloat(latestMonth.income) : 0;
   const monthlyExpenses = latestMonth ? parseFloat(latestMonth.expenses) : 0;
 
+  const { totalSaved, totalTarget } = goals.reduce(
+    (acc, g) => ({
+      totalSaved:  acc.totalSaved  + parseFloat(g.current),
+      totalTarget: acc.totalTarget + parseFloat(g.target),
+    }),
+    { totalSaved: 0, totalTarget: 0 }
+  );
+
   return (
     <div className="flex w-full min-h-full">
       {/* Main scrollable content */}
@@ -43,11 +51,13 @@ export default async function DashboardPage() {
             totalBalance={totalBalance}
             monthlyIncome={monthlyIncome}
             monthlyExpenses={monthlyExpenses}
+            totalSaved={totalSaved}
+            totalTarget={totalTarget}
           />
         </div>
 
         {/* Charts */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 anim-enter anim-delay-1">
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start anim-enter anim-delay-1">
           <div className="lg:col-span-2">
             <CashFlowChart data={monthlyFlow} />
           </div>

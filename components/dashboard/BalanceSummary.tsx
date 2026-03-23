@@ -7,9 +7,13 @@ type Props = {
   totalBalance: number;
   monthlyIncome: number;
   monthlyExpenses: number;
+  totalSaved: number;
+  totalTarget: number;
 };
 
-export default function BalanceSummary({ totalBalance, monthlyIncome, monthlyExpenses }: Props) {
+export default function BalanceSummary({ totalBalance, monthlyIncome, monthlyExpenses, totalSaved, totalTarget }: Props) {
+  const savingsPct = totalTarget > 0 ? Math.min(Math.round((totalSaved / totalTarget) * 100), 100) : 0;
+  const expensesPct = monthlyIncome > 0 ? Math.min(Math.round((monthlyExpenses / monthlyIncome) * 100), 100) : 0;
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
       {/* Hero balance card — 8/12 */}
@@ -78,17 +82,21 @@ export default function BalanceSummary({ totalBalance, monthlyIncome, monthlyExp
       <div className="lg:col-span-4 flex flex-col gap-6">
         <MetricCard
           label="Économies (Objectifs)"
-          value={formatMAD(45000)}
+          value={formatMAD(totalSaved)}
           accentColor="var(--tertiary)"
-          progress={75}
-          badge={<Badge variant="primary">+12%</Badge>}
+          progress={savingsPct}
+          badge={
+            totalTarget > 0
+              ? <Badge variant="primary">{savingsPct}%</Badge>
+              : <Badge variant="neutral">Aucun objectif</Badge>
+          }
         />
         <MetricCard
-          label="Dépenses Fixes"
-          value={formatMAD(8900)}
+          label="Dépenses (Ce mois)"
+          value={formatMAD(monthlyExpenses)}
           accentColor="var(--error)"
-          progress={50}
-          badge={<Badge variant="error">Stable</Badge>}
+          progress={expensesPct}
+          badge={<Badge variant="error">Ce mois</Badge>}
         />
       </div>
     </section>

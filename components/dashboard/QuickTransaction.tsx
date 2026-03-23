@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import { ApiAccount, ApiCategory, createTransaction } from "@/lib/api";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -176,13 +176,15 @@ export default function QuickTransaction({ accounts, categories }: Props) {
           type="submit"
           variant="primary"
           size="lg"
+          loading={submitting}
+          disabled={submitting}
           style={{ width: "100%", justifyContent: "center", borderRadius: "1rem" }}
         >
           {submitting ? (
-            <span>Enregistrement…</span>
+            "Enregistrement…"
           ) : (
             <>
-              <Check size={15} strokeWidth={2.5} />
+              <Plus size={14} strokeWidth={2.5} />
               Enregistrer l&apos;opération
             </>
           )}

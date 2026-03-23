@@ -101,12 +101,13 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
           <Button
             variant="ghost"
             onClick={() => onDelete(goal.id)}
+            loading={isDeleting}
             disabled={isDeleting}
             aria-label={`Supprimer ${goal.label}`}
             className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all hover:opacity-100"
             style={{ color: "var(--outline-variant)" }}
           >
-            <Trash2 size={14} />
+            {!isDeleting && <Trash2 size={14} />}
           </Button>
         </div>
 
@@ -185,12 +186,13 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
             <Button
               variant="primary"
               onClick={commit}
+              loading={saving}
               disabled={saving}
               aria-label="Confirmer"
               className="p-2 rounded-xl shrink-0"
               style={{ boxShadow: "none" }}
             >
-              <Check size={14} strokeWidth={2.5} />
+              {!saving && <Check size={14} strokeWidth={2.5} />}
             </Button>
             <Button
               variant="ghost"
