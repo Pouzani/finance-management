@@ -1,10 +1,7 @@
-export default function GoalsPage() {
-  return (
-    <div className="p-6">
-      <h1 style={{ fontFamily: "var(--font-manrope), sans-serif", color: "var(--on-surface)", fontSize: "1.5rem", fontWeight: 700 }}>
-        Goals
-      </h1>
-      <p style={{ color: "var(--on-surface-variant)", marginTop: "0.5rem" }}>Page en construction.</p>
-    </div>
-  );
+import { getGoals } from "@/lib/api";
+import GoalsView from "@/components/goals/GoalsView";
+
+export default async function GoalsPage() {
+  const goals = await getGoals().catch(() => []);
+  return <GoalsView goals={goals} />;
 }

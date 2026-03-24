@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import { ApiAccount, ApiCategory, createTransaction } from "@/lib/api";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 
 type Props = {
   accounts: ApiAccount[];
@@ -83,34 +84,31 @@ export default function QuickTransaction({ accounts, categories }: Props) {
         {/* Label */}
         <div>
           <EyebrowLabel className="mb-2 block">Libellé</EyebrowLabel>
-          <input
+          <Input
             type="text"
             placeholder="Ex: Loyer, Salaire…"
             value={label}
             onChange={(e) => setLabel(e.target.value)}
-            className="w-full rounded-xl p-3 text-sm outline-none"
-            style={{
-              backgroundColor: "var(--surface-container-highest)",
-              border: "none",
-              color: "var(--on-surface)",
-            }}
+            className="w-full text-sm"
+            style={{ backgroundColor: "var(--surface-container-highest)", border: "none", padding: "12px" }}
           />
         </div>
 
         {/* Amount */}
         <div>
           <EyebrowLabel className="mb-2 block">Montant (MAD)</EyebrowLabel>
-          <input
+          <Input
             type="text"
             placeholder="0.00"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full rounded-xl p-4 text-2xl font-black text-right outline-none font-numeric"
+            className="w-full font-black text-right font-numeric"
             style={{
               fontFamily: "var(--font-manrope), sans-serif",
               backgroundColor: "var(--surface-container-highest)",
               border: "none",
-              color: "var(--on-surface)",
+              fontSize: "24px",
+              padding: "16px",
             }}
           />
         </div>
@@ -178,13 +176,15 @@ export default function QuickTransaction({ accounts, categories }: Props) {
           type="submit"
           variant="primary"
           size="lg"
+          loading={submitting}
+          disabled={submitting}
           style={{ width: "100%", justifyContent: "center", borderRadius: "1rem" }}
         >
           {submitting ? (
-            <span>Enregistrement…</span>
+            "Enregistrement…"
           ) : (
             <>
-              <Check size={15} strokeWidth={2.5} />
+              <Plus size={14} strokeWidth={2.5} />
               Enregistrer l&apos;opération
             </>
           )}

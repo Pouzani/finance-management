@@ -1,6 +1,8 @@
 "use client";
 
 import { Bell, Search, Globe, RefreshCw } from "lucide-react";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 
 export default function TopBar() {
   return (
@@ -23,13 +25,15 @@ export default function TopBar() {
             className="absolute left-3 top-1/2 -translate-y-1/2"
             style={{ color: "var(--on-surface-variant)" }}
           />
-          <input
+          <Input
             type="text"
             placeholder="Rechercher une transaction..."
-            className="w-full pl-10 pr-4 py-2 rounded-lg border-none outline-none text-xs transition-all"
+            className="w-full text-xs"
             style={{
               backgroundColor: "var(--surface-container-high)",
-              color: "var(--on-surface)",
+              border: "none",
+              borderRadius: "0.5rem",
+              padding: "8px 16px 8px 40px",
             }}
           />
         </div>
@@ -39,32 +43,23 @@ export default function TopBar() {
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
           {/* Notifications */}
-          <button
-            className="p-2 rounded-full transition-colors relative"
-            style={{ color: "var(--on-surface-variant)" }}
-          >
+          <Button variant="icon" className="relative" style={{ color: "var(--on-surface-variant)" }}>
             <Bell size={20} strokeWidth={1.8} />
             <span
               className="absolute top-2 right-2 w-2 h-2 rounded-full border-2"
               style={{ backgroundColor: "var(--error)", borderColor: "#f8fafc" }}
             />
-          </button>
+          </Button>
 
           {/* Language */}
-          <button
-            className="p-2 rounded-full transition-colors"
-            style={{ color: "var(--on-surface-variant)" }}
-          >
+          <Button variant="icon" style={{ color: "var(--on-surface-variant)" }}>
             <Globe size={20} strokeWidth={1.8} />
-          </button>
+          </Button>
 
           {/* Currency */}
-          <button
-            className="p-2 rounded-full transition-colors"
-            style={{ color: "var(--on-surface-variant)" }}
-          >
+          <Button variant="icon" style={{ color: "var(--on-surface-variant)" }}>
             <RefreshCw size={20} strokeWidth={1.8} />
-          </button>
+          </Button>
         </div>
 
         {/* Divider */}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Loader2 } from "lucide-react";
 
 type ButtonVariant = "primary" | "ghost" | "link" | "icon";
 type ButtonSize = "sm" | "md" | "lg";
@@ -6,6 +7,7 @@ type ButtonSize = "sm" | "md" | "lg";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  loading?: boolean;
   children: React.ReactNode;
 }
 
@@ -38,24 +40,30 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
   },
 };
 
+const spinnerSize: Record<ButtonSize, number> = { sm: 12, md: 14, lg: 15 };
+
 export default function Button({
   variant = "primary",
   size = "md",
+  loading = false,
   children,
   style,
   className = "",
+  disabled,
   ...props
 }: ButtonProps) {
   const isLink = variant === "link";
   const isIcon = variant === "icon";
+  const isDisabled = disabled || loading;
 
   return (
     <button
+      disabled={isDisabled}
       className={`inline-flex items-center justify-center gap-2 font-bold transition-all active:scale-95 ${isLink ? "hover:underline" : "hover:opacity-90"} ${className}`}
       style={{
         fontFamily: "var(--font-manrope), sans-serif",
         borderRadius: isIcon ? "50%" : "0.75rem",
-        cursor: "pointer",
+        cursor: isDisabled ? "not-allowed" : "pointer",
         border: "none",
         outline: "none",
         ...(isLink ? {} : sizeStyles[size]),
@@ -64,6 +72,12 @@ export default function Button({
       }}
       {...props}
     >
+      {loading && (
+        <Loader2
+          size={spinnerSize[size]}
+          className="animate-spin shrink-0"
+        />
+      )}
       {children}
     </button>
   );

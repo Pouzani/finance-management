@@ -76,11 +76,11 @@ export default function CashFlowChart({ data }: Props) {
       />
 
       {sliced.length === 0 ? (
-        <div className="h-64 flex items-center justify-center" style={{ color: "var(--on-surface-variant)" }}>
+        <div className="h-40 flex items-center justify-center" style={{ color: "var(--on-surface-variant)" }}>
           <p className="text-sm">Aucune donnée disponible</p>
         </div>
       ) : (
-        <div className="h-64 flex items-end justify-between gap-4 px-4 relative">
+        <div className="h-40 flex items-end justify-between gap-4 px-4 relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-full flex flex-col justify-between pointer-events-none">
             {[0, 1, 2, 3].map((i) => (
               <div key={i} className="w-full h-px" style={{ backgroundColor: "var(--surface-container-high)" }} />
@@ -90,8 +90,8 @@ export default function CashFlowChart({ data }: Props) {
           {sliced.map((d) => {
             const income = parseFloat(d.income);
             const expenses = parseFloat(d.expenses);
-            const incomeH = Math.round((income / maxIncome) * 130);
-            const expenseH = Math.round((expenses / maxIncome) * 130);
+            const incomeH = Math.round((income / maxIncome) * 60);
+            const expenseH = Math.round((expenses / maxIncome) * 60);
             return (
               <div key={d.month} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
                 <div
