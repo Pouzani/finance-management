@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getAccessToken } from "@/lib/auth";
+import { useEffect, useState } from 'react';
+import { useRouter } from '@/i18n/navigation';
+import { getAccessToken } from '@/lib/auth';
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!getAccessToken()) {
-      router.replace("/login");
+      router.replace('/login');
     } else {
       setReady(true);
     }
