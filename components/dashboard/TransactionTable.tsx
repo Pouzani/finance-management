@@ -1,36 +1,38 @@
-"use client";
+'use client';
 
-import { ApiTransaction } from "@/lib/api";
-import { formatMAD } from "@/lib/data";
-import Card from "@/components/ui/Card";
-import SectionHeader from "@/components/ui/SectionHeader";
-import IconBox from "@/components/ui/IconBox";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
-import EyebrowLabel from "@/components/ui/EyebrowLabel";
-import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from "@/lib/categoryIcons";
+import { useTranslations } from 'next-intl';
+import { ApiTransaction } from '@/lib/api';
+import { formatMAD } from '@/lib/data';
+import Card from '@/components/ui/Card';
+import SectionHeader from '@/components/ui/SectionHeader';
+import IconBox from '@/components/ui/IconBox';
+import Badge from '@/components/ui/Badge';
+import Button from '@/components/ui/Button';
+import EyebrowLabel from '@/components/ui/EyebrowLabel';
+import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
 
 type Props = { transactions: ApiTransaction[] };
 
 export default function TransactionTable({ transactions }: Props) {
+  const t = useTranslations('dashboard');
   return (
     <Card padding="none" overflow>
       <div className="p-8">
         <SectionHeader
-          title="Dernières Opérations"
-          action={<Button variant="link">Voir tout l&apos;historique</Button>}
+          title={t('recentTransactions')}
+          action={<Button variant="link">{t('viewAllHistory')}</Button>}
         />
       </div>
 
       {transactions.length === 0 ? (
-        <div className="px-8 pb-8 text-center" style={{ color: "var(--on-surface-variant)" }}>
-          <p className="text-sm">Aucune transaction pour le moment.</p>
+        <div className="px-8 pb-8 text-center" style={{ color: 'var(--on-surface-variant)' }}>
+          <p className="text-sm">{t('noTransactions')}</p>
         </div>
       ) : (
         <table className="w-full text-left">
-          <thead style={{ backgroundColor: "var(--surface-container-low)" }}>
+          <thead style={{ backgroundColor: 'var(--surface-container-low)' }}>
             <tr>
-              {["Transaction", "Catégorie", "Compte", "Montant", "Action"].map((h, i) => (
+              {[t('colTransaction'), t('colCategory'), t('colAccount'), t('colAmount'), t('colAction')].map((h, i) => (
                 <th key={h} className={`px-8 py-4 ${i === 3 ? "text-right" : i === 4 ? "text-center" : ""}`}>
                   <EyebrowLabel>{h}</EyebrowLabel>
                 </th>

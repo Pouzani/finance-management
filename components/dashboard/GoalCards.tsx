@@ -1,18 +1,20 @@
-import { ApiGoal } from "@/lib/api";
-import { formatMAD } from "@/lib/data";
-import { PlusCircle } from "lucide-react";
-import Card from "@/components/ui/Card";
-import SectionHeader from "@/components/ui/SectionHeader";
-import ProgressBar from "@/components/ui/ProgressBar";
-import IconBox from "@/components/ui/IconBox";
+import { useTranslations } from 'next-intl';
+import { ApiGoal } from '@/lib/api';
+import { formatMAD } from '@/lib/data';
+import { PlusCircle } from 'lucide-react';
+import Card from '@/components/ui/Card';
+import SectionHeader from '@/components/ui/SectionHeader';
+import ProgressBar from '@/components/ui/ProgressBar';
+import IconBox from '@/components/ui/IconBox';
 
 type Props = { goals: ApiGoal[] };
 
 export default function GoalCards({ goals }: Props) {
+  const t = useTranslations('dashboard');
   return (
     <div className="space-y-6">
       <SectionHeader
-        title="Objectifs Actifs"
+        title={t('activeGoals')}
         action={
           <PlusCircle size={20} style={{ color: "var(--on-surface-variant)", cursor: "pointer" }} />
         }
@@ -48,8 +50,8 @@ export default function GoalCards({ goals }: Props) {
         })}
 
         {goals.length === 0 && (
-          <p className="text-sm text-center py-4" style={{ color: "var(--on-surface-variant)" }}>
-            Aucun objectif défini.
+          <p className="text-sm text-center py-4" style={{ color: 'var(--on-surface-variant)' }}>
+            {t('noGoals')}
           </p>
         )}
       </div>
@@ -57,20 +59,20 @@ export default function GoalCards({ goals }: Props) {
       {/* Promo card */}
       <div
         className="p-6 rounded-3xl relative overflow-hidden"
-        style={{ backgroundColor: "rgba(166,239,239,0.2)", border: "1px solid rgba(166,239,239,0.3)" }}
+        style={{ backgroundColor: 'rgba(166,239,239,0.2)', border: '1px solid rgba(166,239,239,0.3)' }}
       >
         <div className="relative z-10">
-          <p className="text-xs font-bold mb-1" style={{ color: "var(--primary)" }}>
-            Nouveauté Atelier
+          <p className="text-xs font-bold mb-1" style={{ color: 'var(--primary)' }}>
+            {t('newFeature')}
           </p>
-          <p className="text-sm font-bold leading-tight mb-4" style={{ color: "var(--on-primary-container)" }}>
-            Exportez vos rapports fiscaux en un clic.
+          <p className="text-sm font-bold leading-tight mb-4" style={{ color: 'var(--on-primary-container)' }}>
+            {t('exportPromo')}
           </p>
           <button
             className="px-4 py-2 rounded-xl font-bold uppercase tracking-wider transition-opacity hover:opacity-90"
-            style={{ fontSize: "10px", backgroundColor: "var(--primary)", color: "var(--on-primary)" }}
+            style={{ fontSize: '10px', backgroundColor: 'var(--primary)', color: 'var(--on-primary)' }}
           >
-            Essayer
+            {t('tryIt')}
           </button>
         </div>
         <svg className="absolute -bottom-4 -right-4 rotate-12 opacity-10" width="96" height="96" viewBox="0 0 24 24" fill="var(--primary)">
