@@ -2,24 +2,13 @@
 
 import { useState } from "react";
 import { ApiMonthlyFlow } from "@/lib/api";
+import { Period, shortMonth } from "@/lib/months";
 import Card from "@/components/ui/Card";
 import SectionHeader from "@/components/ui/SectionHeader";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import Button from "@/components/ui/Button";
 
-const MONTH_LABELS: Record<string, string> = {
-  "01": "Jan", "02": "Fév", "03": "Mar", "04": "Avr",
-  "05": "Mai", "06": "Jun", "07": "Jul", "08": "Aoû",
-  "09": "Sep", "10": "Oct", "11": "Nov", "12": "Déc",
-};
-
-function monthLabel(yyyyMM: string): string {
-  const mm = yyyyMM.slice(5, 7);
-  return MONTH_LABELS[mm] ?? yyyyMM;
-}
-
 const periods = ["3M", "6M", "1A"] as const;
-type Period = (typeof periods)[number];
 
 type Props = { data: ApiMonthlyFlow[] };
 
@@ -106,7 +95,7 @@ export default function CashFlowChart({ data }: Props) {
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.backgroundColor = "var(--primary-container)"; }}
                 />
-                <EyebrowLabel>{monthLabel(d.month)}</EyebrowLabel>
+                <EyebrowLabel>{shortMonth(d.month)}</EyebrowLabel>
               </div>
             );
           })}
