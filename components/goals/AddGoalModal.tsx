@@ -1,16 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { X, Target } from "lucide-react";
-import type { CreateGoalInput } from "@/lib/api";
-import { GOAL_ICONS, GOAL_ICON_KEYS, DEFAULT_ICON_KEY } from "@/lib/goalIcons";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import EyebrowLabel from "@/components/ui/EyebrowLabel";
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { X, Target } from 'lucide-react';
+import type { CreateGoalInput } from '@/lib/api';
+import { GOAL_ICONS, GOAL_ICON_KEYS, DEFAULT_ICON_KEY } from '@/lib/goalIcons';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+import EyebrowLabel from '@/components/ui/EyebrowLabel';
 
 const PRESET_COLORS = [
-  "#166969", "#0ea5e9", "#8b5cf6", "#f59e0b",
-  "#ec4899", "#10b981", "#ef4444", "#6366f1",
+  '#166969', '#0ea5e9', '#8b5cf6', '#f59e0b',
+  '#ec4899', '#10b981', '#ef4444', '#6366f1',
 ];
 
 type FormState = {
@@ -22,11 +23,11 @@ type FormState = {
 };
 
 const EMPTY_FORM: FormState = {
-  label: "",
-  target: "",
-  current: "0",
+  label: '',
+  target: '',
+  current: '0',
   iconKey: DEFAULT_ICON_KEY,
-  color: "#166969",
+  color: '#166969',
 };
 
 function calcPct(current: number, target: number): number {
@@ -40,6 +41,7 @@ type Props = {
 };
 
 export default function AddGoalModal({ open, onClose, onCreate }: Props) {
+  const t = useTranslations('goals');
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -57,14 +59,14 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
       await onCreate({
         label: form.label.trim(),
         target: target.toFixed(2),
-        current: isNaN(current) ? "0.00" : current.toFixed(2),
+        current: isNaN(current) ? '0.00' : current.toFixed(2),
         icon: form.iconKey,
         color: form.color,
       });
       setForm(EMPTY_FORM);
       onClose();
     } catch {
-      setError("La création a échoué. Vérifiez les données et réessayez.");
+      setError(t('createError'));
     } finally {
       setCreating(false);
     }
@@ -75,30 +77,30 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
-      style={{ backgroundColor: "rgba(43,52,55,0.40)", backdropFilter: "blur(4px)" }}
+      style={{ backgroundColor: 'rgba(43,52,55,0.40)', backdropFilter: 'blur(4px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div
         className="w-full sm:max-w-md rounded-t-3xl sm:rounded-3xl shadow-lift anim-enter"
-        style={{ backgroundColor: "var(--surface-container-lowest)" }}
+        style={{ backgroundColor: 'var(--surface-container-lowest)' }}
       >
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <EyebrowLabel className="mb-1 block">Nouveau</EyebrowLabel>
+              <EyebrowLabel className="mb-1 block">{t('newLabel')}</EyebrowLabel>
               <h2
-                style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "1.25rem", fontWeight: 900, color: "var(--on-surface)" }}
+                style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '1.25rem', fontWeight: 900, color: 'var(--on-surface)' }}
               >
-                Objectif d&apos;épargne
+                {t('createGoalTitle')}
               </h2>
             </div>
-            <Button variant="ghost" onClick={onClose} className="p-2 rounded-xl" style={{ color: "var(--on-surface-variant)" }}>
+            <Button variant="ghost" onClick={onClose} className="p-2 rounded-xl" style={{ color: 'var(--on-surface-variant)' }}>
               <X size={18} />
             </Button>
           </div>
 
           <div className="mb-4">
-            <EyebrowLabel className="mb-2 block">Icône</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('icon')}</EyebrowLabel>
             <div className="flex flex-wrap gap-2">
               {GOAL_ICON_KEYS.map((key) => {
                 const def = GOAL_ICONS[key];
@@ -111,10 +113,10 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
                     title={def.label}
                     className="w-9 h-9 rounded-xl flex items-center justify-center transition-all"
                     style={{
-                      backgroundColor: isSelected ? `${form.color}20` : "var(--surface-container)",
-                      border: isSelected ? `2px solid ${form.color}` : "2px solid transparent",
-                      color: isSelected ? form.color : "var(--on-surface-variant)",
-                      cursor: "pointer",
+                      backgroundColor: isSelected ? `${form.color}20` : 'var(--surface-container)',
+                      border: isSelected ? `2px solid ${form.color}` : '2px solid transparent',
+                      color: isSelected ? form.color : 'var(--on-surface-variant)',
+                      cursor: 'pointer',
                     }}
                   >
                     <Ic size={16} />
@@ -125,7 +127,7 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
           </div>
 
           <div className="mb-4">
-            <EyebrowLabel className="mb-2 block">Couleur</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('color')}</EyebrowLabel>
             <div className="flex gap-2">
               {PRESET_COLORS.map((c) => (
                 <button
@@ -134,50 +136,50 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
                   className="w-7 h-7 rounded-full transition-all"
                   style={{
                     backgroundColor: c,
-                    border: form.color === c ? "3px solid var(--on-surface)" : "3px solid transparent",
-                    cursor: "pointer",
-                    outline: form.color === c ? "2px solid var(--surface-container-lowest)" : "none",
-                    outlineOffset: "-4px",
+                    border: form.color === c ? '3px solid var(--on-surface)' : '3px solid transparent',
+                    cursor: 'pointer',
+                    outline: form.color === c ? '2px solid var(--surface-container-lowest)' : 'none',
+                    outlineOffset: '-4px',
                   }}
-                  aria-label={`Couleur ${c}`}
+                  aria-label={`Color ${c}`}
                 />
               ))}
             </div>
           </div>
 
           <div className="mb-4">
-            <EyebrowLabel className="mb-2 block">Nom de l&apos;objectif</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('goalName')}</EyebrowLabel>
             <Input
               type="text"
               value={form.label}
               onChange={(e) => setForm((s) => ({ ...s, label: e.target.value }))}
               placeholder="ex: Achat appartement"
               className="w-full"
-              style={{ padding: "12px 16px" }}
+              style={{ padding: '12px 16px' }}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div>
-              <EyebrowLabel className="mb-2 block">Objectif (MAD)</EyebrowLabel>
+              <EyebrowLabel className="mb-2 block">{t('goalTarget')}</EyebrowLabel>
               <Input
                 type="text"
                 value={form.target}
                 onChange={(e) => setForm((s) => ({ ...s, target: e.target.value }))}
                 placeholder="150 000"
                 className="w-full font-numeric text-right"
-                style={{ padding: "12px 16px", fontFamily: "var(--font-manrope), sans-serif", fontWeight: 700 }}
+                style={{ padding: '12px 16px', fontFamily: 'var(--font-manrope), sans-serif', fontWeight: 700 }}
               />
             </div>
             <div>
-              <EyebrowLabel className="mb-2 block">Déjà épargné (MAD)</EyebrowLabel>
+              <EyebrowLabel className="mb-2 block">{t('alreadySaved')}</EyebrowLabel>
               <Input
                 type="text"
                 value={form.current}
                 onChange={(e) => setForm((s) => ({ ...s, current: e.target.value }))}
                 placeholder="0"
                 className="w-full font-numeric text-right"
-                style={{ padding: "12px 16px", fontFamily: "var(--font-manrope), sans-serif", fontWeight: 700 }}
+                style={{ padding: '12px 16px', fontFamily: 'var(--font-manrope), sans-serif', fontWeight: 700 }}
               />
             </div>
           </div>
@@ -189,32 +191,32 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
             >
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                style={{ backgroundColor: previewDef?.bg ?? "var(--primary-container)", color: previewDef?.color ?? "var(--on-primary-container)" }}
+                style={{ backgroundColor: previewDef?.bg ?? 'var(--primary-container)', color: previewDef?.color ?? 'var(--on-primary-container)' }}
               >
                 <PreviewIcon size={18} />
               </div>
               <div className="flex-1 min-w-0">
                 <p
                   className="font-bold truncate"
-                  style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "14px", color: "var(--on-surface)" }}
+                  style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '14px', color: 'var(--on-surface)' }}
                 >
                   {form.label}
                 </p>
-                <p style={{ fontSize: "11px", color: "var(--on-surface-variant)" }}>
-                  Objectif : {form.target} MAD
+                <p style={{ fontSize: '11px', color: 'var(--on-surface-variant)' }}>
+                  {t('goalPreviewTarget', { target: form.target })}
                 </p>
               </div>
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs"
-                style={{ backgroundColor: form.color, color: "#fff", fontFamily: "var(--font-manrope), sans-serif" }}
+                style={{ backgroundColor: form.color, color: '#fff', fontFamily: 'var(--font-manrope), sans-serif' }}
               >
-                {`${calcPct(parseFloat(form.current || "0"), parseFloat(form.target))}%`}
+                {`${calcPct(parseFloat(form.current || '0'), parseFloat(form.target))}%`}
               </div>
             </div>
           )}
 
           {error && (
-            <p className="text-sm mb-4 px-1" style={{ color: "var(--error)" }}>{error}</p>
+            <p className="text-sm mb-4 px-1" style={{ color: 'var(--error)' }}>{error}</p>
           )}
 
           <Button
@@ -224,9 +226,9 @@ export default function AddGoalModal({ open, onClose, onCreate }: Props) {
             loading={creating}
             disabled={creating || !form.label.trim() || !form.target}
             className="w-full disabled:opacity-40"
-            style={{ justifyContent: "center", letterSpacing: "0.04em" }}
+            style={{ justifyContent: 'center', letterSpacing: '0.04em' }}
           >
-            {creating ? "Création…" : "Créer l'objectif"}
+            {creating ? t('creating') : t('addGoal')}
           </Button>
         </div>
       </div>
