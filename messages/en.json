@@ -9,7 +9,11 @@
     "noData": "No data available",
     "saving": "Saving…",
     "moreOptions": "More options",
-    "searchPlaceholder": "Search a transaction…"
+    "searchPlaceholder": "Search a transaction…",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleting": "Deleting…",
+    "noResults": "No transactions match your search."
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -133,7 +137,12 @@
     "errorGeneric": "An error occurred.",
     "quickLabel": "Label",
     "quickLabelPlaceholder": "e.g. Rent, Salary…",
-    "quickAmount": "Amount (MAD)"
+    "quickAmount": "Amount (MAD)",
+    "editDrawerTitle": "Edit Transaction",
+    "editDrawerEyebrow": "Edit",
+    "update": "Save changes",
+    "updating": "Saving…",
+    "updated": "Transaction updated!"
   },
   "accounts": {
     "title": "Accounts",
@@ -241,7 +250,12 @@
   },
   "settings": {
     "title": "Settings",
-    "underConstruction": "Page under construction."
+    "language": {
+      "sectionTitle": "Language",
+      "sectionDescription": "Choose your preferred language. Your selection is saved automatically.",
+      "en": "English",
+      "fr": "French"
+    }
   },
   "auth": {
     "login": {

@@ -8,11 +8,13 @@ import {
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import IconBox from '@/components/ui/IconBox';
+import { useTransactionDrawer } from '@/contexts/TransactionDrawerContext';
 
 export default function Sidebar() {
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
   const pathname = usePathname();
+  const { openDrawer } = useTransactionDrawer();
 
   const navItems = [
     { href: '/dashboard' as const, icon: LayoutDashboard, label: t('dashboard') },
@@ -49,7 +51,7 @@ export default function Sidebar() {
       {/* Nav */}
       <nav className="flex-1 space-y-1 overflow-y-auto">
         {navItems.map(({ href, icon: Icon, label }) => {
-          const isActive = pathname === href || pathname.startsWith(href + '/');
+          const isActive = pathname === href || (href !== '/dashboard' && pathname.startsWith(href + '/'));
           return (
             <Link
               key={href}
@@ -74,7 +76,12 @@ export default function Sidebar() {
 
       {/* Add Transaction CTA */}
       <div className="px-6 mt-auto">
-        <Button variant="primary" size="lg" style={{ width: '100%', justifyContent: 'center' }}>
+        <Button
+          variant="primary"
+          size="lg"
+          style={{ width: '100%', justifyContent: 'center' }}
+          onClick={openDrawer}
+        >
           {t('addTransaction')}
         </Button>
       </div>

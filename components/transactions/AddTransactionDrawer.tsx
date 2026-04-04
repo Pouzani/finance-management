@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Plus, X, ChevronDown, Loader2, Check } from 'lucide-react';
-import { ApiAccount, ApiCategory, createTransaction } from '@/lib/api';
+import { ApiAccount, ApiCategory, ApiTransaction, createTransaction, updateTransaction } from '@/lib/api';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import EyebrowLabel from '@/components/ui/EyebrowLabel';
@@ -13,13 +13,16 @@ type Props = {
   onClose: () => void;
   accounts: ApiAccount[];
   categories: ApiCategory[];
-  onSuccess: () => void;
+  onSuccess: (tx: ApiTransaction) => void;
+  editTransaction?: ApiTransaction | null;
 };
 
 export default function AddTransactionDrawer({
-  open, onClose, accounts, categories, onSuccess,
+  open, onClose, accounts, categories, onSuccess, editTransaction,
 }: Props) {
   const t = useTranslations('transactions');
+  const isEditMode = editTransaction != null;
+
   const [formType, setFormType] = useState<'expense' | 'income'>('expense');
   const [formLabel, setFormLabel] = useState('');
   const [formAmount, setFormAmount] = useState('');
@@ -30,6 +33,30 @@ export default function AddTransactionDrawer({
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const successTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => {
+    return () => { if (successTimerRef.current) clearTimeout(successTimerRef.current); };
+  }, []);
+
+  useEffect(() => {
+    if (editTransaction) {
+      setFormType(editTransaction.type);
+      setFormLabel(editTransaction.label);
+      setFormAmount(String(Math.abs(parseFloat(editTransaction.amount))));
+      setFormCategory(editTransaction.category);
+      setFormAccount(editTransaction.account);
+    } else {
+      setFormType('expense');
+      setFormLabel('');
+      setFormAmount('');
+      setFormCategory(categories.find((c) => c.type === 'expense')?.id ?? '');
+      setFormAccount(accounts[0]?.id ?? '');
+    }
+    setFormError(null);
+    setSuccess(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editTransaction]);
 
   const filteredCategories = categories.filter((c) => c.type === formType);
 
@@ -61,25 +88,39 @@ export default function AddTransactionDrawer({
     }
 
     const signedAmount = formType === 'expense' ? -Math.abs(parsed) : Math.abs(parsed);
-    const today = new Date().toISOString().slice(0, 10);
 
     setSubmitting(true);
     try {
-      await createTransaction({
-        label: formLabel.trim(),
-        amount: signedAmount.toFixed(2),
-        date: today,
-        type: formType,
-        account: formAccount,
-        category: formCategory,
-      });
+      let tx: ApiTransaction;
+      if (isEditMode) {
+        tx = await updateTransaction(editTransaction.id, {
+          label: formLabel.trim(),
+          amount: signedAmount.toFixed(2),
+          type: formType,
+          account: formAccount,
+          category: formCategory,
+        });
+      } else {
+        const today = new Date().toISOString().slice(0, 10);
+        tx = await createTransaction({
+          label: formLabel.trim(),
+          amount: signedAmount.toFixed(2),
+          date: today,
+          type: formType,
+          account: formAccount,
+          category: formCategory,
+        });
+      }
       setSuccess(true);
-      setFormLabel('');
-      setFormAmount('');
-      setTimeout(() => {
+      if (!isEditMode) {
+        setFormLabel('');
+        setFormAmount('');
+      }
+      if (successTimerRef.current) clearTimeout(successTimerRef.current);
+      successTimerRef.current = setTimeout(() => {
         setSuccess(false);
         onClose();
-        onSuccess();
+        onSuccess(tx);
       }, 1000);
     } catch (err) {
       const msg =
@@ -110,9 +151,10 @@ export default function AddTransactionDrawer({
 
       {/* Drawer panel */}
       <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={t('drawerTitle')}
+        role={open ? 'dialog' : undefined}
+        aria-modal={open ? 'true' : undefined}
+        aria-hidden={!open}
+        aria-label={isEditMode ? t('editDrawerTitle') : t('drawerTitle')}
         className="fixed top-0 right-0 h-full z-50 flex flex-col"
         style={{
           width: '420px',
@@ -131,7 +173,9 @@ export default function AddTransactionDrawer({
           style={{ borderBottom: '1px solid rgba(227,233,236,0.5)' }}
         >
           <div>
-            <EyebrowLabel className="block mb-1">{t('drawerEyebrow')}</EyebrowLabel>
+            <EyebrowLabel className="block mb-1">
+              {isEditMode ? t('editDrawerEyebrow') : t('drawerEyebrow')}
+            </EyebrowLabel>
             <h2
               style={{
                 fontFamily: 'var(--font-manrope), sans-serif',
@@ -141,7 +185,7 @@ export default function AddTransactionDrawer({
                 lineHeight: 1.2,
               }}
             >
-              {t('drawerTitle')}
+              {isEditMode ? t('editDrawerTitle') : t('drawerTitle')}
             </h2>
           </div>
           <Button
@@ -329,17 +373,17 @@ export default function AddTransactionDrawer({
               {success ? (
                 <>
                   <Check size={15} strokeWidth={2.5} />
-                  {t('saved')}
+                  {isEditMode ? t('updated') : t('saved')}
                 </>
               ) : submitting ? (
                 <>
                   <Loader2 size={14} className="animate-spin" />
-                  {t('saving')}
+                  {isEditMode ? t('updating') : t('saving')}
                 </>
               ) : (
                 <>
                   <Plus size={14} strokeWidth={2.5} />
-                  {t('save')}
+                  {isEditMode ? t('update') : t('save')}
                 </>
               )}
             </Button>

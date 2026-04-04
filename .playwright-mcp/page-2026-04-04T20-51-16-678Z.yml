@@ -1,0 +1,238 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e9]:
+          - heading "The Ledger" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Premium Management
+      - navigation [ref=e12]:
+        - link "Dashboard" [ref=e13] [cursor=pointer]:
+          - /url: /en/dashboard
+          - img [ref=e14]
+          - generic [ref=e19]: Dashboard
+        - link "Transactions" [ref=e20] [cursor=pointer]:
+          - /url: /en/dashboard/transactions
+          - img [ref=e21]
+          - generic [ref=e24]: Transactions
+        - link "Budgets" [ref=e25] [cursor=pointer]:
+          - /url: /en/dashboard/budgets
+          - img [ref=e26]
+          - generic [ref=e29]: Budgets
+        - link "Goals" [ref=e30] [cursor=pointer]:
+          - /url: /en/dashboard/goals
+          - img [ref=e31]
+          - generic [ref=e35]: Goals
+        - link "Accounts" [ref=e36] [cursor=pointer]:
+          - /url: /en/dashboard/accounts
+          - img [ref=e37]
+          - generic [ref=e39]: Accounts
+        - link "Reports" [ref=e40] [cursor=pointer]:
+          - /url: /en/dashboard/reports
+          - img [ref=e41]
+          - generic [ref=e43]: Reports
+        - link "Settings" [ref=e44] [cursor=pointer]:
+          - /url: /en/dashboard/settings
+          - img [ref=e45]
+          - generic [ref=e48]: Settings
+      - button "+ Add Transaction" [ref=e50] [cursor=pointer]
+    - generic [ref=e51]:
+      - banner [ref=e52]:
+        - generic [ref=e54]:
+          - img [ref=e55]
+          - textbox "Search a transaction…" [ref=e58]
+        - generic [ref=e59]:
+          - generic [ref=e60]:
+            - button [ref=e61] [cursor=pointer]:
+              - img [ref=e62]
+            - button [ref=e66] [cursor=pointer]:
+              - img [ref=e67]
+            - button [ref=e70] [cursor=pointer]:
+              - img [ref=e71]
+          - generic [ref=e77] [cursor=pointer]:
+            - generic [ref=e78]:
+              - paragraph [ref=e79]: pouzanitest
+              - paragraph [ref=e80]: Plan Premium
+            - generic [ref=e81]: PO
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e86]:
+            - generic [ref=e88]:
+              - generic [ref=e89]:
+                - generic [ref=e90]:
+                  - paragraph [ref=e91]: Total Balance
+                  - heading "32.000 MAD" [level=2] [ref=e92]
+                - img [ref=e94]
+              - generic [ref=e98]:
+                - generic [ref=e99]:
+                  - paragraph [ref=e100]: Income (This month)
+                  - paragraph [ref=e101]: + 32.000
+                - generic [ref=e103]:
+                  - paragraph [ref=e104]: Expenses (This month)
+                  - paragraph [ref=e105]: "- 0"
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - paragraph [ref=e108]: Savings (Goals)
+                - generic [ref=e109]:
+                  - generic [ref=e110]: "0"
+                  - generic [ref=e111]: No goal
+              - generic [ref=e113]:
+                - paragraph [ref=e114]: Expenses (This month)
+                - generic [ref=e115]:
+                  - generic [ref=e116]: "0"
+                  - generic [ref=e117]: This month
+          - generic [ref=e119]:
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - generic [ref=e123]:
+                  - heading "Cash Flow Evolution" [level=3] [ref=e124]
+                  - paragraph [ref=e125]: Comparative analysis of monthly flows
+                - generic [ref=e127]:
+                  - generic [ref=e128]:
+                    - generic [ref=e129]: Income
+                    - generic [ref=e131]: Expenses
+                  - generic [ref=e133]:
+                    - button "3M" [ref=e134] [cursor=pointer]
+                    - button "6M" [ref=e135] [cursor=pointer]
+                    - button "1Y" [ref=e136] [cursor=pointer]
+              - paragraph [ref=e140] [cursor=pointer]: Mar
+            - generic [ref=e142]:
+              - generic [ref=e144]:
+                - heading "Breakdown" [level=3] [ref=e145]
+                - paragraph [ref=e146]: Expenses by category
+              - paragraph [ref=e148]: No transactions yet.
+          - generic [ref=e149]:
+            - generic [ref=e150]:
+              - generic [ref=e152]:
+                - heading "Recent Transactions" [level=3] [ref=e154]
+                - button "View all history" [ref=e156] [cursor=pointer]
+              - table [ref=e157]:
+                - rowgroup [ref=e158]:
+                  - row "Transaction Category Account Amount Action" [ref=e159]:
+                    - columnheader "Transaction" [ref=e160]:
+                      - paragraph [ref=e161]: Transaction
+                    - columnheader "Category" [ref=e162]:
+                      - paragraph [ref=e163]: Category
+                    - columnheader "Account" [ref=e164]:
+                      - paragraph [ref=e165]: Account
+                    - columnheader "Amount" [ref=e166]:
+                      - paragraph [ref=e167]: Amount
+                    - columnheader "Action" [ref=e168]:
+                      - paragraph [ref=e169]: Action
+                - rowgroup [ref=e170]:
+                  - row "Salaire 2026-03-28 Salaire BOA + 16.500 MAD More options" [ref=e171]:
+                    - cell "Salaire 2026-03-28" [ref=e172]:
+                      - generic [ref=e173]:
+                        - img [ref=e175]
+                        - generic [ref=e177]:
+                          - paragraph [ref=e178]: Salaire
+                          - paragraph [ref=e179]: 2026-03-28
+                    - cell "Salaire" [ref=e180]:
+                      - generic [ref=e181]: Salaire
+                    - cell "BOA" [ref=e182]
+                    - cell "+ 16.500 MAD" [ref=e183]:
+                      - generic [ref=e184]: + 16.500 MAD
+                    - cell "More options" [ref=e185]:
+                      - button "More options" [ref=e187] [cursor=pointer]:
+                        - img [ref=e188]
+                  - row "Salaire 2026-03-28 Freelance BOA + 15.500 MAD More options" [ref=e192]:
+                    - cell "Salaire 2026-03-28" [ref=e193]:
+                      - generic [ref=e194]:
+                        - img [ref=e196]
+                        - generic [ref=e198]:
+                          - paragraph [ref=e199]: Salaire
+                          - paragraph [ref=e200]: 2026-03-28
+                    - cell "Freelance" [ref=e201]:
+                      - generic [ref=e202]: Freelance
+                    - cell "BOA" [ref=e203]
+                    - cell "+ 15.500 MAD" [ref=e204]:
+                      - generic [ref=e205]: + 15.500 MAD
+                    - cell "More options" [ref=e206]:
+                      - button "More options" [ref=e208] [cursor=pointer]:
+                        - img [ref=e209]
+            - generic [ref=e213]:
+              - generic [ref=e214]:
+                - generic [ref=e215]:
+                  - paragraph [ref=e216]: Entry
+                  - heading [level=2] [ref=e217]: New Transaction
+                - button [ref=e218] [cursor=pointer]:
+                  - img [ref=e219]
+              - generic [ref=e222]:
+                - generic [ref=e223]:
+                  - button [pressed] [ref=e224] [cursor=pointer]: Expense
+                  - button [ref=e225] [cursor=pointer]: Income
+                - generic [ref=e226]:
+                  - paragraph [ref=e228]: Amount
+                  - generic [ref=e229]:
+                    - generic [ref=e230]: MAD
+                    - textbox [ref=e231]:
+                      - /placeholder: "0.00"
+                - generic [ref=e232]:
+                  - paragraph [ref=e234]: Label
+                  - textbox [ref=e235]:
+                    - /placeholder: e.g. Salary, Rent, Carrefour…
+                - generic [ref=e236]:
+                  - paragraph [ref=e238]: Category
+                  - generic [ref=e239]:
+                    - combobox [ref=e240]
+                    - img
+                - generic [ref=e241]:
+                  - paragraph [ref=e243]: Account
+                  - generic [ref=e244]:
+                    - combobox [ref=e245]
+                    - img
+                - button [ref=e247] [cursor=pointer]:
+                  - img [ref=e248]
+                  - text: Save transaction
+        - complementary [ref=e249]:
+          - generic [ref=e251]:
+            - heading "Quick Transaction" [level=3] [ref=e254]
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - paragraph [ref=e257]: Label
+                - textbox "e.g. Rent, Salary…" [ref=e258]
+              - generic [ref=e259]:
+                - paragraph [ref=e260]: Amount (MAD)
+                - textbox "0.00" [ref=e261]
+              - generic [ref=e262]:
+                - button "Expense" [ref=e263] [cursor=pointer]
+                - button "Income" [ref=e264] [cursor=pointer]
+              - generic [ref=e265]:
+                - paragraph [ref=e266]: Category
+                - combobox [ref=e267]:
+                  - option "Abonnements" [selected]
+                  - option "Alimentation"
+                  - option "Cat 0"
+                  - option "Cat 1"
+                  - option "Cat 2"
+                  - option "Éducation"
+                  - option "Food"
+                  - option "Food"
+                  - option "Food"
+                  - option "Food"
+                  - option "Logement"
+                  - option "Loisirs"
+                  - option "Santé"
+                  - option "Transport"
+                  - option "Transport"
+              - generic [ref=e268]:
+                - paragraph [ref=e269]: Account
+                - combobox [ref=e270]:
+                  - option "BOA" [selected]
+              - button "Save transaction" [ref=e271] [cursor=pointer]:
+                - img [ref=e272]
+                - text: Save transaction
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - heading "Active Goals" [level=3] [ref=e277]
+              - img [ref=e279] [cursor=pointer]
+            - paragraph [ref=e282]: No goals defined.
+            - generic [ref=e283]:
+              - generic [ref=e284]:
+                - paragraph [ref=e285]: New in Atelier
+                - paragraph [ref=e286]: Export your tax reports in one click.
+                - button "Try it" [ref=e287]
+              - img [ref=e288]
+  - button "Open Next.js Dev Tools" [ref=e295] [cursor=pointer]:
+    - img [ref=e296]
+  - alert [ref=e299]

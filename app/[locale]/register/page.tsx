@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useRouter, Link } from "@/i18n/navigation";
 import { register, setTokens, extractErrorMessage } from "@/lib/auth";
 
 // ── Shared input ──────────────────────────────────────────────────────────────
@@ -130,7 +130,7 @@ function BrandPanel() {
               fontWeight: 500,
             }}
           >
-            Finance Personnelle
+            Personal Finance
           </span>
         </div>
 
@@ -145,9 +145,9 @@ function BrandPanel() {
             marginBottom: "1.25rem",
           }}
         >
-          Le Grand
+          The
           <br />
-          Livre
+          Ledger
         </h1>
 
         <p
@@ -160,8 +160,7 @@ function BrandPanel() {
             maxWidth: "28ch",
           }}
         >
-          Rejoignez des milliers de Marocains qui gèrent leur patrimoine avec
-          précision et sérénité.
+          Join thousands of people who manage their wealth with precision and serenity.
         </p>
       </div>
 
@@ -169,10 +168,10 @@ function BrandPanel() {
       <div className="anim-enter anim-delay-2" style={{ position: "relative", zIndex: 1 }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
           {[
-            { icon: "📊", text: "Tableaux de bord en temps réel" },
-            { icon: "🎯", text: "Suivi des objectifs d'épargne" },
-            { icon: "📋", text: "Gestion des budgets par catégorie" },
-            { icon: "🔒", text: "Données sécurisées et privées" },
+            { icon: "📊", text: "Real-time dashboards" },
+            { icon: "🎯", text: "Savings goal tracking" },
+            { icon: "📋", text: "Budget management by category" },
+            { icon: "🔒", text: "Secure and private data" },
           ].map((feat) => (
             <div
               key={feat.text}
@@ -206,6 +205,7 @@ function BrandPanel() {
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function RegisterPage() {
+  const t = useTranslations('auth.register');
   const router = useRouter();
   const [form, setForm] = useState({
     username: "",
@@ -225,7 +225,7 @@ export default function RegisterPage() {
     setError(null);
 
     if (form.password !== form.password2) {
-      setError("Les mots de passe ne correspondent pas");
+      setError(t('passwordMismatch'));
       return;
     }
 
@@ -235,7 +235,7 @@ export default function RegisterPage() {
       setTokens(tokens.access, tokens.refresh);
       router.push("/dashboard");
     } catch (err) {
-      setError(extractErrorMessage(err, "Erreur lors de la création du compte"));
+      setError(extractErrorMessage(err, t('createAccountError')));
     } finally {
       setLoading(false);
     }
@@ -307,7 +307,7 @@ export default function RegisterPage() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Créer un compte
+              {t('heading')}
             </h2>
             <p
               style={{
@@ -317,7 +317,7 @@ export default function RegisterPage() {
                 margin: 0,
               }}
             >
-              Rejoignez Le Grand Livre gratuitement
+              {t('subheading')}
             </p>
           </div>
 
@@ -342,34 +342,34 @@ export default function RegisterPage() {
             )}
 
             <AuthInput
-              label="Nom d'utilisateur"
+              label={t('username')}
               value={form.username}
               onChange={set("username")}
-              placeholder="votre_nom"
+              placeholder="your_name"
               required
             />
 
             <AuthInput
-              label="Adresse e-mail"
+              label={t('email')}
               type="email"
               value={form.email}
               onChange={set("email")}
-              placeholder="vous@exemple.ma"
+              placeholder="you@example.com"
               required
             />
 
             <AuthInput
-              label="Mot de passe"
+              label={t('password')}
               type="password"
               value={form.password}
               onChange={set("password")}
               placeholder="••••••••"
               required
-              hint="8 caractères minimum"
+              hint={t('passwordHint')}
             />
 
             <AuthInput
-              label="Confirmer le mot de passe"
+              label={t('confirmPassword')}
               type="password"
               value={form.password2}
               onChange={set("password2")}
@@ -410,7 +410,7 @@ export default function RegisterPage() {
                 e.currentTarget.style.transform = "scale(1)";
               }}
             >
-              {loading ? "Création du compte…" : "Créer mon compte"}
+              {loading ? t('submitting') : t('submit')}
             </button>
           </form>
 
@@ -423,7 +423,7 @@ export default function RegisterPage() {
               fontFamily: "var(--font-inter), sans-serif",
             }}
           >
-            Déjà un compte ?{" "}
+            {t('hasAccount')}{" "}
             <Link
               href="/login"
               style={{
@@ -432,7 +432,7 @@ export default function RegisterPage() {
                 fontWeight: 600,
               }}
             >
-              Se connecter
+              {t('signIn')}
             </Link>
           </p>
         </div>

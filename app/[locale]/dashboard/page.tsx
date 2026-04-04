@@ -68,7 +68,7 @@ export default async function DashboardPage() {
 
         {/* Transactions */}
         <div className="anim-enter anim-delay-2">
-          <TransactionTable transactions={txPage.results} />
+          <TransactionTable transactions={txPage.results} accounts={accounts} categories={categories} />
         </div>
       </div>
 

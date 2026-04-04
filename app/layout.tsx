@@ -23,7 +23,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className={`${inter.variable} ${manrope.variable} h-full antialiased`}
+    <html lang="en" className={`${inter.variable} ${manrope.variable} h-full antialiased`}
       style={{ fontFamily: 'var(--font-inter), sans-serif', colorScheme: 'light' }}>
       <body className="min-h-full">{children}</body>
     </html>
