@@ -3,20 +3,23 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
 interface TransactionDrawerContextValue {
-  signal: number;
+  isOpen: boolean;
   openDrawer: () => void;
+  closeDrawer: () => void;
 }
 
 const TransactionDrawerContext = createContext<TransactionDrawerContextValue>({
-  signal: 0,
+  isOpen: false,
   openDrawer: () => {},
+  closeDrawer: () => {},
 });
 
 export function TransactionDrawerProvider({ children }: { children: React.ReactNode }) {
-  const [signal, setSignal] = useState(0);
-  const openDrawer = useCallback(() => setSignal((s) => s + 1), []);
+  const [isOpen, setIsOpen] = useState(false);
+  const openDrawer = useCallback(() => setIsOpen(true), []);
+  const closeDrawer = useCallback(() => setIsOpen(false), []);
   return (
-    <TransactionDrawerContext.Provider value={{ signal, openDrawer }}>
+    <TransactionDrawerContext.Provider value={{ isOpen, openDrawer, closeDrawer }}>
       {children}
     </TransactionDrawerContext.Provider>
   );

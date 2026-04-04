@@ -15,7 +15,6 @@ import ActionMenu from '@/components/ui/ActionMenu';
 import AddTransactionDrawer from '@/components/transactions/AddTransactionDrawer';
 import { CATEGORY_ICONS, DEFAULT_ICON } from '@/lib/categoryIcons';
 import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
-import { useTransactionDrawer } from '@/contexts/TransactionDrawerContext';
 
 type Props = {
   transactions: ApiTransaction[];
@@ -27,7 +26,6 @@ export default function TransactionTable({ transactions: initialTransactions, ac
   const t = useTranslations('dashboard');
   const tCommon = useTranslations('common');
   const searchParams = useSearchParams();
-  const { signal } = useTransactionDrawer();
   const query = searchParams.get('q')?.toLowerCase() ?? '';
 
   const [txList, setTxList] = useState(initialTransactions);
@@ -47,14 +45,7 @@ export default function TransactionTable({ transactions: initialTransactions, ac
 
   useEffect(() => { setTxList(initialTransactions); }, [initialTransactions]);
 
-  useEffect(() => {
-    if (signal > 0) {
-      setEditingTx(null);
-      setDrawerOpen(true);
-    }
-  }, [signal]);
-
-  useActionMenuOutsideClick(!!menuOpenId, setMenuOpenId);
+useActionMenuOutsideClick(!!menuOpenId, setMenuOpenId);
 
   function handleDrawerClose() {
     setDrawerOpen(false);

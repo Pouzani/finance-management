@@ -2,6 +2,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import TopBar from '@/components/layout/TopBar';
 import AuthGuard from '@/components/AuthGuard';
 import { TransactionDrawerProvider } from '@/contexts/TransactionDrawerContext';
+import GlobalTransactionDrawer from '@/components/layout/GlobalTransactionDrawer';
 
 export default function DashboardLayout({
   children,
@@ -19,6 +20,7 @@ export default function DashboardLayout({
           <TopBar />
           <div className="flex-1 overflow-hidden flex">
             <AuthGuard>{children}</AuthGuard>
+          <GlobalTransactionDrawer />
           </div>
         </div>
       </div>
