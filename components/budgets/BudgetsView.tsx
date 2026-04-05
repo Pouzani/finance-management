@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import { Pencil, Check, X, AlertTriangle, TrendingDown } from "lucide-react";
 import {
   ApiCategory,
@@ -28,6 +29,8 @@ type Props = {
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function BudgetsView({ categories, budgets }: Props) {
+  const t = useTranslations('budgets');
+  const locale = useLocale();
   const router = useRouter();
   const [editState, setEditState] = useState<{ cat: ApiCategory; value: string } | null>(null);
   const [saving, setSaving] = useState(false);
@@ -41,7 +44,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
   const budgetByCatId = new Map(budgets.map((b) => [b.category.id, b]));
 
   // Month label — from current date (all categories share the same calendar month)
-  const monthLabel = new Date().toLocaleDateString("fr-MA", {
+  const monthLabel = new Date().toLocaleDateString(locale, {
     month: "long",
     year: "numeric",
   });
@@ -103,7 +106,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-end justify-between mb-6">
           <div>
-            <EyebrowLabel className="mb-2 block">Planification</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('eyebrow')}</EyebrowLabel>
             <h1
               style={{
                 fontFamily: "var(--font-manrope), sans-serif",
@@ -113,7 +116,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                 lineHeight: 1.1,
               }}
             >
-              Budgets
+              {t('title')}
             </h1>
           </div>
           <div className="text-right">
@@ -130,7 +133,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-6">
               <div>
-                <EyebrowLabel light className="mb-2 block">Santé budgétaire</EyebrowLabel>
+                <EyebrowLabel light className="mb-2 block">{t('budgetHealth')}</EyebrowLabel>
                 {totalBudget === 0 ? (
                   <p
                     style={{
@@ -140,7 +143,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                       fontWeight: 500,
                     }}
                   >
-                    Définissez vos limites par catégorie ci-dessous
+                    {t('setLimits')}
                   </p>
                 ) : (
                   <div className="flex items-end gap-3">
@@ -155,7 +158,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                       {overallPct}%
                     </span>
                     <span style={{ fontSize: "13px", opacity: 0.75, marginBottom: "8px" }}>
-                      du budget utilisé
+                      {t('budgetUsed')}
                     </span>
                   </div>
                 )}
@@ -176,7 +179,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                     <span style={{ fontSize: "10px", fontWeight: 500 }}>MAD</span>
                   </p>
                   <p style={{ fontSize: "11px", opacity: 0.65, marginTop: "2px" }}>
-                    {totalRemaining >= 0 ? "disponibles" : "dépassement"}
+                    {totalRemaining >= 0 ? t('available') : t('overspend')}
                   </p>
                 </div>
               )}
@@ -192,10 +195,10 @@ export default function BudgetsView({ categories, budgets }: Props) {
                 />
                 <div className="flex justify-between">
                   <span style={{ fontSize: "10px", opacity: 0.6 }}>
-                    {formatMAD(totalSpent)} MAD dépensés
+                    {formatMAD(totalSpent)} MAD {t('spent').toLowerCase()}
                   </span>
                   <span style={{ fontSize: "10px", opacity: 0.6 }}>
-                    {formatMAD(totalBudget)} MAD budgétés
+                    {formatMAD(totalBudget)} MAD {t('budget').toLowerCase()}
                   </span>
                 </div>
               </div>
@@ -208,17 +211,17 @@ export default function BudgetsView({ categories, budgets }: Props) {
           <div className="grid grid-cols-3 gap-4 mb-6 anim-enter anim-delay-1">
             {[
               {
-                label: "Budget total",
+                label: t('totalBudget'),
                 value: formatMAD(totalBudget),
                 color: "var(--on-surface)",
               },
               {
-                label: "Dépensé ce mois",
+                label: t('spentThisMonth'),
                 value: formatMAD(totalSpent),
                 color: "var(--error)",
               },
               {
-                label: overCount > 0 ? `${overCount} dépassement${overCount > 1 ? "s" : ""}` : "Tout en ordre",
+                label: overCount > 0 ? t('overCount', { count: overCount }) : t('allOnTrack'),
                 value: overCount > 0 ? "⚠" : "✓",
                 color: overCount > 0 ? "#f59e0b" : "var(--primary)",
                 isStatus: true,
@@ -256,11 +259,11 @@ export default function BudgetsView({ categories, budgets }: Props) {
       <div className="px-8 pb-12">
         <div className="flex items-center justify-between mb-5">
           <EyebrowLabel>
-            Catégories — {budgetsSet}/{categories.length} configurées
+            {t('configuredCount', { set: budgetsSet, total: categories.length })}
           </EyebrowLabel>
           {budgetsSet < categories.length && (
             <p style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}>
-              Cliquez sur le montant pour définir un budget
+              {t('clickToSet')}
             </p>
           )}
         </div>
@@ -316,10 +319,10 @@ export default function BudgetsView({ categories, budgets }: Props) {
 
                     {/* Status badge */}
                     {{
-                      over: <Badge variant="error" className="shrink-0"><AlertTriangle size={9} className="mr-0.5" />Dépassé</Badge>,
-                      warning: <Badge variant="custom" bg="rgba(245,158,11,0.15)" color="#b45309" className="shrink-0">Attention</Badge>,
-                      good: <Badge variant="primary" className="shrink-0">En ordre</Badge>,
-                      unset: <Badge variant="neutral" className="shrink-0">Non défini</Badge>,
+                      over: <Badge variant="error" className="shrink-0"><AlertTriangle size={9} className="mr-0.5" />{t('statusOver')}</Badge>,
+                      warning: <Badge variant="custom" bg="rgba(245,158,11,0.15)" color="#b45309" className="shrink-0">{t('statusWarning')}</Badge>,
+                      good: <Badge variant="primary" className="shrink-0">{t('statusGood')}</Badge>,
+                      unset: <Badge variant="neutral" className="shrink-0">{t('statusUnset')}</Badge>,
                     }[status]}
                   </div>
 
@@ -335,11 +338,12 @@ export default function BudgetsView({ categories, budgets }: Props) {
                             fontFamily: "var(--font-manrope), sans-serif",
                           }}
                         >
-                          {pct}% utilisé
+                          {t('used', { pct })}
                         </span>
                         <span style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}>
-                          {formatMAD(Math.abs(parseFloat(budget.remaining)))} MAD{" "}
-                          {parseFloat(budget.remaining) >= 0 ? "restants" : "dépassés"}
+                          {parseFloat(budget.remaining) >= 0
+                            ? t('remainingAmount', { amount: formatMAD(Math.abs(parseFloat(budget.remaining))) })
+                            : t('overspentAmount', { amount: formatMAD(Math.abs(parseFloat(budget.remaining))) })}
                         </span>
                       </div>
                       <ProgressBar value={pct} color={barColor} />
@@ -353,7 +357,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                         className="mt-1.5"
                         style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}
                       >
-                        Définissez un budget pour suivre vos dépenses
+                        {t('noBudgetHint')}
                       </p>
                     </div>
                   )}
@@ -362,7 +366,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span style={{ fontSize: "11px", color: "var(--on-surface-variant)" }}>
-                        Dépensé
+                        {t('spent')}
                       </span>
                       <span
                         className="font-bold font-numeric"
@@ -379,7 +383,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                     {/* Budget limit — editable */}
                     <div className="flex justify-between items-center">
                       <span style={{ fontSize: "11px", color: "var(--on-surface-variant)" }}>
-                        Budget
+                        {t('budget')}
                       </span>
                       {isEditing ? (
                         <div className="flex items-center gap-1">
@@ -402,13 +406,13 @@ export default function BudgetsView({ categories, budgets }: Props) {
                               opacity: saving ? 0.5 : 1,
                               padding: "4px 8px",
                             }}
-                            aria-label={`Budget pour ${cat.name} en MAD`}
+                            aria-label={t('setBudgetFor', { name: cat.name })}
                           />
                           <Button
                             variant="ghost"
                             onClick={commitEdit}
                             disabled={saving}
-                            aria-label="Confirmer"
+                            aria-label={t('confirm')}
                             className="p-1 rounded-lg"
                             style={{ color: "var(--primary)" }}
                           >
@@ -418,7 +422,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                             variant="ghost"
                             onClick={cancelEdit}
                             disabled={saving}
-                            aria-label="Annuler"
+                            aria-label={t('cancel')}
                             className="p-1 rounded-lg"
                             style={{ color: "var(--on-surface-variant)" }}
                           >
@@ -430,7 +434,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                           variant="ghost"
                           onClick={() => startEdit(cat)}
                           className="flex items-center gap-1.5 group/edit"
-                          aria-label={`Modifier le budget pour ${cat.name}`}
+                          aria-label={t('editBudgetFor', { name: cat.name })}
                         >
                           {hasLimit ? (
                             <span
@@ -452,7 +456,7 @@ export default function BudgetsView({ categories, budgets }: Props) {
                                 fontWeight: 700,
                               }}
                             >
-                              Définir →
+                              {t('setLimit')}
                             </span>
                           )}
                           <Pencil
@@ -484,10 +488,10 @@ export default function BudgetsView({ categories, budgets }: Props) {
                 color: "var(--on-surface)",
               }}
             >
-              Aucune catégorie de dépenses
+              {t('noCategories')}
             </p>
             <p style={{ fontSize: "13px", color: "var(--on-surface-variant)" }}>
-              Ajoutez des catégories via l&apos;API pour commencer à budgétiser.
+              {t('noCategoriesSub')}
             </p>
           </div>
         )}

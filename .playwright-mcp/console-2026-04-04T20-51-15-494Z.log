@@ -1,0 +1,947 @@
+[      64ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[      74ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  150810ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  150880ms] [LOG] [Fast Refresh] done in 30ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  234605ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  234634ms] [LOG] [Fast Refresh] done in 18ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  238936ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  238967ms] [LOG] [Fast Refresh] done in 17ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  383554ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  383596ms] [LOG] [Fast Refresh] done in 46ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  459488ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  459515ms] [LOG] [Fast Refresh] done in 26ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  467822ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  467854ms] [LOG] [Fast Refresh] done in 8ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  472497ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  472531ms] [LOG] [Fast Refresh] done in 23ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  622796ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  622925ms] [LOG] [Fast Refresh] done in 187ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  623242ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  623253ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  628277ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  628285ms] ReferenceError: useRouter is not defined
+    at Sidebar (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0nqqw5g._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Flayout%252FSidebar.tsx+%255Bapp-client%255D+%2528ecmascript%2529:33:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10179:316)
+    at flushSyncWork$1 (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9230:86)
+    at Object.scheduleRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:299:13)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:384:38)
+    at applyUpdate (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:878:31)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:886:13
+[  628331ms] [LOG] [Fast Refresh] done in 29ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  631863ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  631864ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  631880ms] ReferenceError: useRouter is not defined
+    at Sidebar (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0nqqw5g._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Flayout%252FSidebar.tsx+%255Bapp-client%255D+%2528ecmascript%2529:33:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10179:316)
+    at flushSyncWork$1 (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9230:86)
+    at Object.scheduleRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:299:13)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:384:38)
+    at applyUpdate (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:878:31)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:886:13
+[  631958ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  631961ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard:0
+[  631975ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  631981ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  632022ms] ReferenceError: useRouter is not defined
+    at Sidebar (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0nqqw5g._.js:194:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:2647:64)
+[  636306ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  636331ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  636388ms] [LOG] [Fast Refresh] done in 71ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  636478ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  636483ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  639419ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  639450ms] [LOG] [Fast Refresh] done in 20ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  643483ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  643489ms] ReferenceError: useRouter is not defined
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_040wyb-._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:47:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10179:316)
+    at flushSyncWork$1 (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9230:86)
+    at Object.scheduleRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:299:13)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:384:38)
+    at applyUpdate (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:878:31)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:886:13
+[  643535ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  647224ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  647225ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  647244ms] ReferenceError: useRouter is not defined
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_040wyb-._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:47:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:2647:64)
+[  647334ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  647342ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  647961ms] ReferenceError: useRouter is not defined
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_040wyb-._.js:1746:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:2647:64)
+[  660118ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  660119ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  660161ms] [LOG] [Fast Refresh] done in 29ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  660210ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  660218ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  724158ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  724215ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  724215ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  724215ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  724331ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  724336ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  724336ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  724336ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  724339ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard?_rsc=1gy3c:0
+[  724358ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard?_rsc=1gy3c:0
+[  724386ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard?_rsc=1gy3c:0
+[  724394ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard:0
+[  724429ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_react-dom_0a90321._.js:15305
+[  724459ms] Error: ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1189:59)
+    at DevBundlerService.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/base-server.js:1745:26)
+[  724459ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724460ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724514ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724514ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  724514ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  736846ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:4:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  2 | import TopBar from '@/components/layout/TopBar';
+  3 | import AuthGuard from '@/components/AuthGuard';
+> 4 | import { AddTransactionProvider } from '@/contexts/AddTransactionContext';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | export default function DashboardLayout({
+  7 |   children,
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  736846ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  736846ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  736903ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  740353ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  740353ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  740391ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  743246ms] [ERROR] ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx:25:7
+Expected corresponding JSX closing tag for <TransactionDrawerProvider>
+  23 |         </div>
+  24 |       </div>
+> 25 |     </AddTransactionProvider>
+     |       ^^^^^^^^^^^^^^^^^^^^^^
+  26 |   );
+  27 | }
+  28 |
+
+Parsing ecmascript source code failed @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  743246ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  743246ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  743289ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  746779ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  746861ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  746861ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  746875ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  746875ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  747011ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  747054ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard:0
+[  747062ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_react-dom_0a90321._.js:15305
+[  747066ms] Error: ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1189:59)
+    at DevBundlerService.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/base-server.js:1745:26)
+[  747066ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  747066ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  747067ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  747067ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  747067ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  747100ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  747100ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx:11:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+   9 | import Button from '@/components/ui/Button';
+  10 | import IconBox from '@/components/ui/IconBox';
+> 11 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 |
+  13 | export default function Sidebar() {
+  14 |   const t = useTranslations('nav');
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/layout/Sidebar.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  750297ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  750331ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  753152ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  753200ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  753281ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard:0
+[  753290ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_react-dom_0a90321._.js:15305
+[  753297ms] Error: ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at Object.getCompilationErrors (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1189:59)
+    at DevBundlerService.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/base-server.js:1745:26)
+[  753295ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  753295ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  753328ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx:18:1
+Module not found: Can't resolve '@/contexts/AddTransactionContext'
+  16 | import { CATEGORY_ICONS as categoryIcons, DEFAULT_ICON } from '@/lib/categoryIcons';
+  17 | import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
+> 18 | import { useAddTransaction } from '@/contexts/AddTransactionContext';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  19 |
+  20 | type Props = {
+  21 |   transactions: ApiTransaction[];
+
+Import map: aliased to relative './contexts/AddTransactionContext' inside of [project]/Projects/FinanceManagement/finance-management
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/dashboard/TransactionTable.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  756543ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  756637ms] [LOG] [Fast Refresh] done in 22ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1226
+[  756783ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  756793ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  757551ms] ReferenceError: useAddTransaction is not defined
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_040wyb-._.js:1746:24)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:2647:64)
+[  759608ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  759609ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  759651ms] [LOG] [Fast Refresh] done in 34ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  759711ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  759720ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  960023ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  960073ms] [LOG] [Fast Refresh] done in 29ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  965278ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  965306ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  987194ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  987200ms] ReferenceError: categoryIcons is not defined
+    at eval (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_040wyb-._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:189:49)
+    at Array.map (<anonymous>)
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_040wyb-._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:187:58)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10179:316)
+    at flushSyncWork$1 (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9230:86)
+    at Object.scheduleRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:299:13)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:384:38)
+    at applyUpdate (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:878:31)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:886:13
+[  987250ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  993330ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  993331ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  993380ms] [LOG] [Fast Refresh] done in 21ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  993443ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  993452ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  994572ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:8000/api/auth/me/:0
+[  997168ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  997195ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[ 1006689ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[ 1006717ms] [LOG] [Fast Refresh] done in 19ms @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431

@@ -4,6 +4,14 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api";
 
 // ── Response types ──────────────────────────────────────────────────────────
 
+export type ApiUser = {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+};
+
 export type ApiAccount = {
   id: string;
   name: string;
@@ -132,6 +140,10 @@ async function del(path: string): Promise<void> {
 
 // ── Read endpoints ───────────────────────────────────────────────────────────
 
+export async function getMe(): Promise<ApiUser> {
+  return get<ApiUser>("/auth/me/");
+}
+
 export async function getAccounts(): Promise<ApiAccount[]> {
   const data = await get<Paginated<ApiAccount>>("/accounts/");
   return data.results;
@@ -251,4 +263,15 @@ export async function createTransaction(
   body: CreateTransactionInput
 ): Promise<ApiTransaction> {
   return mutate<ApiTransaction>("/transactions/", "POST", body);
+}
+
+export async function updateTransaction(
+  id: string,
+  body: Partial<CreateTransactionInput>
+): Promise<ApiTransaction> {
+  return mutate<ApiTransaction>(`/transactions/${id}/`, "PATCH", body);
+}
+
+export async function deleteTransaction(id: string): Promise<void> {
+  return del(`/transactions/${id}/`);
 }

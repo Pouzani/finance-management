@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { useState, useRef, useEffect } from "react";
-import { Trash2, Check, X, Sparkles } from "lucide-react";
-import type { ApiGoal } from "@/lib/api";
-import { formatMAD } from "@/lib/data";
-import { resolveGoalIcon } from "@/lib/goalIcons";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import RingProgress from "@/components/ui/RingProgress";
-import ProgressBar from "@/components/ui/ProgressBar";
+import { useState, useRef, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
+import { Trash2, Check, X, Sparkles } from 'lucide-react';
+import type { ApiGoal } from '@/lib/api';
+import { formatMAD } from '@/lib/data';
+import { resolveGoalIcon } from '@/lib/goalIcons';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+import RingProgress from '@/components/ui/RingProgress';
+import ProgressBar from '@/components/ui/ProgressBar';
 
 function calcPct(current: number, target: number): number {
   return target > 0 ? Math.round((current / target) * 100) : 0;
@@ -22,8 +23,9 @@ type Props = {
   delayClass?: string;
 };
 
-export default function GoalCard({ goal, isDeleting, onDelete, onContribute, delayClass = "" }: Props) {
-  const [contributeInput, setContributeInput] = useState("");
+export default function GoalCard({ goal, isDeleting, onDelete, onContribute, delayClass = '' }: Props) {
+  const t = useTranslations('goals');
+  const [contributeInput, setContributeInput] = useState('');
   const [isContributing, setIsContributing] = useState(false);
   const [saving, setSaving] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,7 +39,7 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
   const pct = calcPct(current, target);
   const remaining = Math.max(0, target - current);
   const isComplete = current >= target;
-  const ringColor = isComplete ? "#10b981" : goal.color || "var(--primary)";
+  const ringColor = isComplete ? '#10b981' : goal.color || 'var(--primary)';
   const iconDef = resolveGoalIcon(goal.icon);
   const Icon = iconDef.icon;
 
@@ -58,14 +60,14 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
 
   function cancel() {
     setIsContributing(false);
-    setContributeInput("");
+    setContributeInput('');
   }
 
   return (
     <div
       className={`rounded-3xl shadow-ambient anim-enter ${delayClass} card-interactive`}
       style={{
-        backgroundColor: "var(--surface-container-lowest)",
+        backgroundColor: 'var(--surface-container-lowest)',
         borderTop: `3px solid ${ringColor}`,
         opacity: isDeleting ? 0.5 : 1,
       }}
@@ -82,17 +84,17 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
             <div>
               <p
                 className="font-bold leading-tight"
-                style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "15px", color: "var(--on-surface)" }}
+                style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '15px', color: 'var(--on-surface)' }}
               >
                 {goal.label}
               </p>
               {isComplete && (
                 <span
                   className="inline-flex items-center gap-1 mt-1"
-                  style={{ fontSize: "10px", color: "#10b981", fontWeight: 700 }}
+                  style={{ fontSize: '10px', color: '#10b981', fontWeight: 700 }}
                 >
                   <Sparkles size={10} />
-                  Complété
+                  {t('completed_badge')}
                 </span>
               )}
             </div>
@@ -103,9 +105,9 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
             onClick={() => onDelete(goal.id)}
             loading={isDeleting}
             disabled={isDeleting}
-            aria-label={`Supprimer ${goal.label}`}
+            aria-label={t('deleteAriaLabel', { goalLabel: goal.label })}
             className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all hover:opacity-100"
-            style={{ color: "var(--outline-variant)" }}
+            style={{ color: 'var(--outline-variant)' }}
           >
             {!isDeleting && <Trash2 size={14} />}
           </Button>
@@ -114,10 +116,10 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
         <div className="flex items-center gap-5 mb-5">
           <div className="relative shrink-0">
             <RingProgress pct={pct} color={ringColor} size={80} />
-            <div className="absolute inset-0 flex items-center justify-center" style={{ pointerEvents: "none" }}>
+            <div className="absolute inset-0 flex items-center justify-center" style={{ pointerEvents: 'none' }}>
               <span
                 className="font-black font-numeric"
-                style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "14px", color: ringColor }}
+                style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '14px', color: ringColor }}
               >
                 {pct}%
               </span>
@@ -127,27 +129,27 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
           <div className="flex-1 min-w-0">
             <div className="space-y-2">
               <div className="flex justify-between items-baseline">
-                <span style={{ fontSize: "11px", color: "var(--on-surface-variant)" }}>Épargné</span>
+                <span style={{ fontSize: '11px', color: 'var(--on-surface-variant)' }}>{t('saved')}</span>
                 <span
                   className="font-bold font-numeric"
-                  style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "13px", color: "var(--on-surface)" }}
+                  style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '13px', color: 'var(--on-surface)' }}
                 >
-                  {formatMAD(current)} <span style={{ fontSize: "9px", fontWeight: 500 }}>MAD</span>
+                  {formatMAD(current)} <span style={{ fontSize: '9px', fontWeight: 500 }}>MAD</span>
                 </span>
               </div>
               <div className="flex justify-between items-baseline">
-                <span style={{ fontSize: "11px", color: "var(--on-surface-variant)" }}>Objectif</span>
+                <span style={{ fontSize: '11px', color: 'var(--on-surface-variant)' }}>{t('target')}</span>
                 <span
                   className="font-bold font-numeric"
-                  style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "13px", color: "var(--on-surface-variant)" }}
+                  style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '13px', color: 'var(--on-surface-variant)' }}
                 >
-                  {formatMAD(target)} <span style={{ fontSize: "9px", fontWeight: 500 }}>MAD</span>
+                  {formatMAD(target)} <span style={{ fontSize: '9px', fontWeight: 500 }}>MAD</span>
                 </span>
               </div>
               {!isComplete && (
                 <div className="flex justify-between items-baseline">
-                  <span style={{ fontSize: "11px", color: "var(--on-surface-variant)" }}>Restant</span>
-                  <span className="font-numeric" style={{ fontSize: "11px", color: "var(--outline)", fontWeight: 600 }}>
+                  <span style={{ fontSize: '11px', color: 'var(--on-surface-variant)' }}>{t('remainingLabel')}</span>
+                  <span className="font-numeric" style={{ fontSize: '11px', color: 'var(--outline)', fontWeight: 600 }}>
                     {formatMAD(remaining)} MAD
                   </span>
                 </div>
@@ -162,9 +164,9 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
           <div className="flex items-center gap-2">
             <div
               className="flex-1 flex items-center rounded-xl overflow-hidden"
-              style={{ backgroundColor: "var(--surface-container)", border: "2px solid rgba(22,105,105,0.20)" }}
+              style={{ backgroundColor: 'var(--surface-container)', border: '2px solid rgba(22,105,105,0.20)' }}
             >
-              <span style={{ fontSize: "11px", color: "var(--on-surface-variant)", paddingLeft: "10px", whiteSpace: "nowrap" }}>
+              <span style={{ fontSize: '11px', color: 'var(--on-surface-variant)', paddingLeft: '10px', whiteSpace: 'nowrap' }}>
                 ± MAD
               </span>
               <Input
@@ -173,14 +175,14 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
                 value={contributeInput}
                 onChange={(e) => setContributeInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") commit();
-                  if (e.key === "Escape") cancel();
+                  if (e.key === 'Enter') commit();
+                  if (e.key === 'Escape') cancel();
                 }}
                 disabled={saving}
                 placeholder="ex: 500"
                 className="flex-1 font-bold font-numeric text-right"
-                style={{ background: "none", border: "none", padding: "8px", fontSize: "13px", fontFamily: "var(--font-manrope), sans-serif", fontWeight: 700, color: "var(--on-surface)" }}
-                aria-label={`Montant à ajouter pour ${goal.label}`}
+                style={{ background: 'none', border: 'none', padding: '8px', fontSize: '13px', fontFamily: 'var(--font-manrope), sans-serif', fontWeight: 700, color: 'var(--on-surface)' }}
+                aria-label={t('amountAriaLabel', { goalLabel: goal.label })}
               />
             </div>
             <Button
@@ -188,9 +190,9 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
               onClick={commit}
               loading={saving}
               disabled={saving}
-              aria-label="Confirmer"
+              aria-label={t('confirmAriaLabel')}
               className="p-2 rounded-xl shrink-0"
-              style={{ boxShadow: "none" }}
+              style={{ boxShadow: 'none' }}
             >
               {!saving && <Check size={14} strokeWidth={2.5} />}
             </Button>
@@ -198,9 +200,9 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
               variant="ghost"
               onClick={cancel}
               disabled={saving}
-              aria-label="Annuler"
+              aria-label={t('cancelAriaLabel')}
               className="p-2 rounded-xl shrink-0"
-              style={{ backgroundColor: "var(--surface-container)", color: "var(--on-surface-variant)" }}
+              style={{ backgroundColor: 'var(--surface-container)', color: 'var(--on-surface-variant)' }}
             >
               <X size={14} />
             </Button>
@@ -212,15 +214,15 @@ export default function GoalCard({ goal, isDeleting, onDelete, onContribute, del
             disabled={isComplete}
             className="w-full py-2 rounded-xl"
             style={{
-              fontSize: "12px",
-              backgroundColor: isComplete ? "var(--surface-container)" : `${ringColor}14`,
-              color: isComplete ? "var(--on-surface-variant)" : ringColor,
-              cursor: isComplete ? "default" : "pointer",
-              letterSpacing: "0.04em",
-              justifyContent: "center",
+              fontSize: '12px',
+              backgroundColor: isComplete ? 'var(--surface-container)' : `${ringColor}14`,
+              color: isComplete ? 'var(--on-surface-variant)' : ringColor,
+              cursor: isComplete ? 'default' : 'pointer',
+              letterSpacing: '0.04em',
+              justifyContent: 'center',
             }}
           >
-            {isComplete ? "✓ Objectif atteint" : "+ Ajouter des fonds"}
+            {isComplete ? t('goalReached') : t('addFunds')}
           </Button>
         )}
       </div>

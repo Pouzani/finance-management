@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ApiMonthlyFlow, ApiCategorySplit, ApiBudget } from "@/lib/api";
 import { Period, shortMonth, yearOf } from "@/lib/months";
 import { formatMAD } from "@/lib/data";
@@ -21,6 +22,7 @@ type Props = {
 };
 
 export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Props) {
+  const t = useTranslations('reports');
   const [period, setPeriod] = useState<Period>("6M");
 
   const sliced =
@@ -43,10 +45,7 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
   const budgetCount = budgets.length;
   const overBudgetCount = budgets.filter((b) => parseFloat(b.remaining) < 0).length;
 
-  const periodLabel =
-    period === "3M" ? "3 derniers mois" :
-    period === "6M" ? "6 derniers mois" :
-    "12 derniers mois";
+  const periodLabel = t(`period.${period}`);
 
   return (
     <div className="flex-1 overflow-y-auto p-8 space-y-8 min-w-0">
@@ -61,10 +60,10 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
               lineHeight: 1.1,
             }}
           >
-            Rapports
+            {t('title')}
           </h1>
           <p style={{ color: "var(--on-surface-variant)", marginTop: "0.375rem", fontSize: "0.875rem" }}>
-            Analyse financière · {periodLabel}
+            {t('eyebrow')} · {periodLabel}
           </p>
         </div>
 
@@ -72,7 +71,7 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
           className="flex gap-1 p-1 rounded-2xl shadow-ambient"
           style={{ backgroundColor: "var(--surface-container-lowest)" }}
         >
-          {(["3M", "6M", "1A"] as Period[]).map((p) => (
+          {(["3M", "6M", "1Y"] as Period[]).map((p) => (
             <Button
               key={p}
               variant="ghost"
@@ -96,33 +95,33 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard
-          label="Revenus"
+          label={t('kpi.income')}
           value={`${formatMAD(totalIncome)} MAD`}
           accent="var(--primary)"
           trend="up"
-          sub={`${sliced.length} mois`}
+          sub={t('months', { count: sliced.length })}
         />
         <KpiCard
-          label="Dépenses"
+          label={t('kpi.expenses')}
           value={`${formatMAD(totalExpenses)} MAD`}
           accent="#e57373"
           trend="down"
-          sub={`${sliced.length} mois`}
+          sub={t('months', { count: sliced.length })}
         />
         <KpiCard
-          label="Flux Net"
+          label={t('kpi.netFlow')}
           value={`${netFlow >= 0 ? "+" : ""}${formatMAD(netFlow)} MAD`}
           accent={netFlow >= 0 ? "var(--primary)" : "#e57373"}
           trend={netFlow >= 0 ? "up" : "down"}
-          sub={netFlow >= 0 ? "Excédent" : "Déficit"}
+          sub={netFlow >= 0 ? t('kpi.surplus') : t('kpi.deficit')}
           valueColor={netFlow >= 0 ? "var(--primary-dim)" : "#c62828"}
         />
         <KpiCard
-          label="Taux d'Épargne"
+          label={t('kpi.savingsRate')}
           value={`${savingsRate}%`}
           accent="var(--tertiary)"
           trend={savingsRate >= 20 ? "up" : savingsRate >= 0 ? "neutral" : "down"}
-          sub={savingsRate >= 20 ? "Excellent" : savingsRate >= 10 ? "Correct" : savingsRate >= 0 ? "Faible" : "Négatif"}
+          sub={savingsRate >= 20 ? t('kpi.excellent') : savingsRate >= 10 ? t('kpi.good') : savingsRate >= 0 ? t('kpi.low') : t('kpi.negative')}
         />
       </div>
 
@@ -139,21 +138,21 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
         <div className="lg:col-span-2">
           <Card padding="lg">
             <SectionHeader
-              title="Détail Mensuel"
-              subtitle="Revenus, dépenses et solde par mois"
+              title={t('monthlyBreakdown')}
+              subtitle={t('monthlyBreakdownSub')}
               className="mb-6"
             />
             {sliced.length === 0 ? (
               <p className="text-sm text-center py-8" style={{ color: "var(--on-surface-variant)" }}>
-                Aucune donnée disponible
+                {t('noData')}
               </p>
             ) : (
               <div className="space-y-0">
                 <div className="grid gap-4 px-4 pb-3" style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
-                  <EyebrowLabel>Mois</EyebrowLabel>
-                  <EyebrowLabel className="text-right">Revenus</EyebrowLabel>
-                  <EyebrowLabel className="text-right">Dépenses</EyebrowLabel>
-                  <EyebrowLabel className="text-right">Solde</EyebrowLabel>
+                  <EyebrowLabel>{t('colMonth')}</EyebrowLabel>
+                  <EyebrowLabel className="text-right">{t('colIncome')}</EyebrowLabel>
+                  <EyebrowLabel className="text-right">{t('colExpenses')}</EyebrowLabel>
+                  <EyebrowLabel className="text-right">{t('colBalance')}</EyebrowLabel>
                 </div>
                 {reversedSliced.map((m, i) => {
                   const income = parseFloat(m.income);
@@ -196,13 +195,13 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
         <div className="flex flex-col gap-6">
           <Card padding="lg">
             <SectionHeader
-              title="Par Catégorie"
-              subtitle="Répartition des dépenses"
+              title={t('byCategory')}
+              subtitle={t('byCategorySub')}
               className="mb-5"
             />
             {categorySplit.length === 0 ? (
               <p className="text-sm text-center py-4" style={{ color: "var(--on-surface-variant)" }}>
-                Aucune donnée
+                {t('noCategory')}
               </p>
             ) : (
               <div className="space-y-4">
@@ -234,8 +233,8 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
           {budgetCount > 0 && (
             <Card padding="lg">
               <SectionHeader
-                title="Santé Budgétaire"
-                subtitle="Budgets du mois en cours"
+                title={t('budgetHealth')}
+                subtitle={t('budgetHealthSub')}
                 className="mb-5"
               />
               <div className="flex items-center gap-4 mb-5">
@@ -261,11 +260,11 @@ export default function ReportsView({ monthlyFlow, categorySplit, budgets }: Pro
                 <div>
                   <p style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--on-surface)" }}>
                     {overBudgetCount === 0
-                      ? "Tous les budgets respectés"
-                      : `${overBudgetCount} dépassement${overBudgetCount > 1 ? "s" : ""}`}
+                      ? t('allBudgetsOk')
+                      : t('budgetsOver', { count: overBudgetCount })}
                   </p>
                   <p style={{ fontSize: "0.75rem", color: "var(--on-surface-variant)", marginTop: 2 }}>
-                    {budgetCount} budget{budgetCount > 1 ? "s" : ""} actif{budgetCount > 1 ? "s" : ""}
+                    {t('activeBudgets', { count: budgetCount })}
                   </p>
                 </div>
               </div>

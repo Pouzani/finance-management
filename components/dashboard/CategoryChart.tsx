@@ -1,13 +1,15 @@
-"use client";
+'use client';
 
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
-import { ApiCategorySplit } from "@/lib/api";
-import Card from "@/components/ui/Card";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import { useTranslations } from 'next-intl';
+import { ApiCategorySplit } from '@/lib/api';
+import Card from '@/components/ui/Card';
+import SectionHeader from '@/components/ui/SectionHeader';
 
 type Props = { data: ApiCategorySplit[] };
 
 export default function CategoryChart({ data }: Props) {
+  const t = useTranslations('dashboard');
   const total = data.reduce((s, c) => s + parseFloat(c.value), 0);
 
   const chartData = data.map((c) => ({
@@ -18,9 +20,9 @@ export default function CategoryChart({ data }: Props) {
   if (data.length === 0) {
     return (
       <Card padding="md">
-        <SectionHeader title="Répartition" subtitle="Dépenses par catégorie" className="mb-4" />
-        <div className="h-40 flex items-center justify-center" style={{ color: "var(--on-surface-variant)" }}>
-          <p className="text-sm">Aucune donnée disponible</p>
+        <SectionHeader title={t('categoryBreakdown')} subtitle={t('categoryBreakdownSub')} className="mb-4" />
+        <div className="h-40 flex items-center justify-center" style={{ color: 'var(--on-surface-variant)' }}>
+          <p className="text-sm">{t('noTransactions')}</p>
         </div>
       </Card>
     );
@@ -29,8 +31,8 @@ export default function CategoryChart({ data }: Props) {
   return (
     <Card padding="md">
       <SectionHeader
-        title="Répartition"
-        subtitle="Dépenses par catégorie"
+        title={t('categoryBreakdown')}
+        subtitle={t('categoryBreakdownSub')}
         className="mb-4"
       />
 

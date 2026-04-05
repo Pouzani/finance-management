@@ -1,44 +1,45 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import {
-  Search, Plus, X, Loader2, SlidersHorizontal,
-  ChevronDown, MoreHorizontal,
-} from "lucide-react";
-import Input from "@/components/ui/Input";
+  Search, Plus, X, Loader2, SlidersHorizontal, ChevronDown,
+} from 'lucide-react';
+import Input from '@/components/ui/Input';
 import {
   ApiTransaction, ApiAccount, ApiCategory,
-  getTransactions,
-} from "@/lib/api";
-import { formatMAD } from "@/lib/data";
-import Card from "@/components/ui/Card";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
-import IconBox from "@/components/ui/IconBox";
-import EyebrowLabel from "@/components/ui/EyebrowLabel";
-import AddTransactionDrawer from "./AddTransactionDrawer";
-import { CATEGORY_ICONS, DEFAULT_ICON } from "@/lib/categoryIcons";
+  getTransactions, deleteTransaction,
+} from '@/lib/api';
+import { formatMAD, formatDateLabel } from '@/lib/data';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import Button from '@/components/ui/Button';
+import IconBox from '@/components/ui/IconBox';
+import EyebrowLabel from '@/components/ui/EyebrowLabel';
+import ActionMenu from '@/components/ui/ActionMenu';
+import AddTransactionDrawer from './AddTransactionDrawer';
+import { CATEGORY_ICONS, DEFAULT_ICON } from '@/lib/categoryIcons';
+import { useActionMenuOutsideClick } from '@/hooks/useActionMenuOutsideClick';
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
-type FilterType = "all" | "income" | "expense";
+const FILTER_TYPES = ['all', 'income', 'expense'] as const;
+type FilterType = typeof FILTER_TYPES[number];
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function groupByDate(txs: ApiTransaction[]): [string, ApiTransaction[]][] {
   const map = new Map<string, ApiTransaction[]>();
   for (const tx of txs) {
-    const existing = map.get(tx.date) ?? [];
-    map.set(tx.date, [...existing, tx]);
+    const group = map.get(tx.date);
+    if (group) {
+      group.push(tx);
+    } else {
+      map.set(tx.date, [tx]);
+    }
   }
   return Array.from(map.entries()).sort(([a], [b]) => b.localeCompare(a));
-}
-
-function formatDateLabel(dateStr: string): string {
-  const d = new Date(dateStr + "T00:00:00");
-  return d.toLocaleDateString("fr-MA", {
-    weekday: "long", day: "numeric", month: "long", year: "numeric",
-  });
 }
 
 function dayNet(txs: ApiTransaction[]): number {
@@ -59,10 +60,13 @@ type Props = {
 export default function TransactionsView({
   initialTransactions, initialTotal, accounts, categories,
 }: Props) {
+  const t = useTranslations('transactions');
+  const locale = useLocale();
+
   // ── Filter state
-  const [search, setSearch] = useState("");
-  const [filterType, setFilterType] = useState<FilterType>("all");
-  const [filterCategory, setFilterCategory] = useState("");
+  const [search, setSearch] = useState('');
+  const [filterType, setFilterType] = useState<FilterType>('all');
+  const [filterCategory, setFilterCategory] = useState('');
 
   // ── Data state
   const [transactions, setTransactions] = useState(initialTransactions);
@@ -73,10 +77,17 @@ export default function TransactionsView({
 
   // ── Drawer
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [editingTx, setEditingTx] = useState<ApiTransaction | null>(null);
+
+  // ── Action menu
+  const [menuOpenId, setMenuOpenId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const searchTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   // Skip the initial effect run — initialTransactions already loaded server-side
   const isMounted = useRef(false);
+
+  useActionMenuOutsideClick(!!menuOpenId, setMenuOpenId);
 
   // ── Fetch ──────────────────────────────────────────────────────────────────
 
@@ -90,11 +101,11 @@ export default function TransactionsView({
     setLoading(true);
     try {
       const params: Record<string, string> = {
-        ordering: "-date",
+        ordering: '-date',
         page: String(opts.page),
       };
       if (opts.search) params.search = opts.search;
-      if (opts.type !== "all") params.type = opts.type;
+      if (opts.type !== 'all') params.type = opts.type;
       if (opts.category) params.category = opts.category;
 
       const result = await getTransactions(params);
@@ -126,41 +137,52 @@ export default function TransactionsView({
 
   // ── Stats (computed from loaded transactions) ──────────────────────────────
 
-  const totalIncome = transactions
-    .filter((t) => t.type === "income")
-    .reduce((s, t) => s + parseFloat(t.amount), 0);
-  const totalExpenses = transactions
-    .filter((t) => t.type === "expense")
-    .reduce((s, t) => s + Math.abs(parseFloat(t.amount)), 0);
+  const { totalIncome, totalExpenses, incomeCount, expenseCount } = useMemo(() =>
+    transactions.reduce(
+      (acc, tx) => {
+        if (tx.type === 'income') {
+          acc.totalIncome += parseFloat(tx.amount);
+          acc.incomeCount++;
+        } else {
+          acc.totalExpenses += Math.abs(parseFloat(tx.amount));
+          acc.expenseCount++;
+        }
+        return acc;
+      },
+      { totalIncome: 0, totalExpenses: 0, incomeCount: 0, expenseCount: 0 },
+    ),
+  [transactions]);
   const netBalance = totalIncome - totalExpenses;
   const statsPartial = total > transactions.length;
 
   const statsData = [
-    {
-      label: "Revenus",
-      value: totalIncome,
-      sign: "+",
-      color: "var(--primary)",
-      count: transactions.filter((t) => t.type === "income").length,
-    },
-    {
-      label: "Dépenses",
-      value: totalExpenses,
-      sign: "−",
-      color: "var(--error)",
-      count: transactions.filter((t) => t.type === "expense").length,
-    },
-    {
-      label: "Solde net",
-      value: Math.abs(netBalance),
-      sign: netBalance >= 0 ? "+" : "−",
-      color: netBalance >= 0 ? "var(--primary)" : "var(--error)",
-    },
+    { label: t('income'), value: totalIncome, sign: '+', color: 'var(--primary)', count: incomeCount },
+    { label: t('expenses'), value: totalExpenses, sign: '−', color: 'var(--error)', count: expenseCount },
+    { label: t('netBalance'), value: Math.abs(netBalance), sign: netBalance >= 0 ? '+' : '−', color: netBalance >= 0 ? 'var(--primary)' : 'var(--error)' },
   ];
 
   // ── Grouped list ───────────────────────────────────────────────────────────
 
   const groups = groupByDate(transactions);
+
+  // ── Handlers ──────────────────────────────────────────────────────────────
+
+  function handleDrawerClose() {
+    setDrawerOpen(false);
+    setEditingTx(null);
+  }
+
+  async function handleDelete(id: string) {
+    setDeletingId(id);
+    try {
+      await deleteTransaction(id);
+      setTransactions((prev) => prev.filter((tx) => tx.id !== id));
+      setTotal((prev) => prev - 1);
+    } finally {
+      setDeletingId(null);
+      setMenuOpenId(null);
+    }
+  }
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -171,34 +193,35 @@ export default function TransactionsView({
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-start justify-between mb-6">
           <div>
-            <EyebrowLabel className="mb-2 block">Comptabilité</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('eyebrow')}</EyebrowLabel>
             <h1
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
-                fontSize: "2rem",
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '2rem',
                 fontWeight: 900,
-                color: "var(--on-surface)",
+                color: 'var(--on-surface)',
                 lineHeight: 1.1,
               }}
             >
-              Historique
+              {t('title')}
             </h1>
             <p
               className="mt-1"
-              style={{ fontSize: "13px", color: "var(--on-surface-variant)" }}
+              style={{ fontSize: '13px', color: 'var(--on-surface-variant)' }}
             >
-              {total} opération{total !== 1 ? "s" : ""}{" "}
-              {filterType !== "all" || filterCategory || search ? "filtrées" : "au total"}
+              {filterType !== 'all' || filterCategory || search
+                ? t('totalCountFiltered', { count: total })
+                : t('totalCount', { count: total })}
             </p>
           </div>
 
           <Button
             variant="primary"
-            onClick={() => setDrawerOpen(true)}
-            style={{ gap: "6px", marginTop: "4px" }}
+            onClick={() => { setEditingTx(null); setDrawerOpen(true); }}
+            style={{ gap: '6px', marginTop: '4px' }}
           >
             <Plus size={14} strokeWidth={2.5} />
-            Nouvelle transaction
+            {t('newTransaction')}
           </Button>
         </div>
 
@@ -209,8 +232,8 @@ export default function TransactionsView({
               key={label}
               className="rounded-2xl p-4 anim-enter"
               style={{
-                backgroundColor: "var(--surface-container-lowest)",
-                boxShadow: "0px 4px 16px rgba(43,52,55,0.05)",
+                backgroundColor: 'var(--surface-container-lowest)',
+                boxShadow: '0px 4px 16px rgba(43,52,55,0.05)',
               }}
             >
               <EyebrowLabel className="mb-2 block">{label}</EyebrowLabel>
@@ -218,26 +241,26 @@ export default function TransactionsView({
                 <p
                   className="font-bold font-numeric leading-none"
                   style={{
-                    fontFamily: "var(--font-manrope), sans-serif",
-                    fontSize: "1.15rem",
+                    fontFamily: 'var(--font-manrope), sans-serif',
+                    fontSize: '1.15rem',
                     color,
                   }}
                 >
-                  {sign} {formatMAD(value)}{" "}
-                  <span style={{ fontSize: "9px", fontWeight: 500 }}>MAD</span>
+                  {sign} {formatMAD(value)}{' '}
+                  <span style={{ fontSize: '9px', fontWeight: 500 }}>MAD</span>
                 </p>
                 {count !== undefined && (
-                  <span style={{ fontSize: "10px", color: "var(--on-surface-variant)", whiteSpace: "nowrap" }}>
-                    {count} opér.
+                  <span style={{ fontSize: '10px', color: 'var(--on-surface-variant)', whiteSpace: 'nowrap' }}>
+                    {t('loaded', { count })}
                   </span>
                 )}
               </div>
               {statsPartial && (
                 <p
                   className="mt-1.5"
-                  style={{ fontSize: "9px", color: "var(--on-surface-variant)", opacity: 0.7 }}
+                  style={{ fontSize: '9px', color: 'var(--on-surface-variant)', opacity: 0.7 }}
                 >
-                  sur {transactions.length} chargées
+                  {t('loaded', { count: transactions.length })}
                 </p>
               )}
             </div>
@@ -249,9 +272,9 @@ export default function TransactionsView({
       <div
         className="sticky top-0 z-10 px-8 py-3"
         style={{
-          backgroundColor: "rgba(241,244,246,0.92)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
+          backgroundColor: 'rgba(241,244,246,0.92)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
         }}
       >
         <div className="flex items-center gap-3">
@@ -260,27 +283,27 @@ export default function TransactionsView({
             <Search
               size={14}
               className="absolute left-3 top-1/2 -translate-y-1/2"
-              style={{ color: "var(--on-surface-variant)" }}
+              style={{ color: 'var(--on-surface-variant)' }}
             />
             <Input
               type="text"
-              placeholder="Rechercher une transaction…"
+              placeholder={t('searchPlaceholder')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full text-sm"
               style={{
-                backgroundColor: "var(--surface-container-lowest)",
-                border: "none",
-                padding: "10px 36px",
+                backgroundColor: 'var(--surface-container-lowest)',
+                border: 'none',
+                padding: '10px 36px',
               }}
             />
             {search && (
               <Button
                 variant="ghost"
-                onClick={() => setSearch("")}
-                aria-label="Effacer la recherche"
+                onClick={() => setSearch('')}
+                aria-label={t('clearSearch')}
                 className="absolute right-3 top-1/2 -translate-y-1/2"
-                style={{ color: "var(--on-surface-variant)", padding: "0" }}
+                style={{ color: 'var(--on-surface-variant)', padding: '0' }}
               >
                 <X size={12} />
               </Button>
@@ -290,51 +313,51 @@ export default function TransactionsView({
           {/* Type filter pill group */}
           <div
             className="flex gap-0.5 rounded-xl p-1"
-            style={{ backgroundColor: "var(--surface-container-lowest)" }}
+            style={{ backgroundColor: 'var(--surface-container-lowest)' }}
             role="group"
-            aria-label="Filtrer par type"
+            aria-label={t('filterByType')}
           >
-            {(["all", "income", "expense"] as const).map((t) => (
+            {FILTER_TYPES.map((filterVal) => (
               <button
-                key={t}
-                onClick={() => setFilterType(t)}
-                aria-pressed={filterType === t}
+                key={filterVal}
+                onClick={() => setFilterType(filterVal)}
+                aria-pressed={filterType === filterVal}
                 className="px-3 py-1.5 rounded-lg transition-all font-bold"
                 style={{
-                  fontSize: "10px",
-                  fontFamily: "var(--font-manrope), sans-serif",
-                  backgroundColor: filterType === t ? "var(--primary)" : "transparent",
-                  color: filterType === t ? "var(--on-primary)" : "var(--on-surface-variant)",
-                  letterSpacing: "0.02em",
-                  border: "none",
-                  cursor: "pointer",
+                  fontSize: '10px',
+                  fontFamily: 'var(--font-manrope), sans-serif',
+                  backgroundColor: filterType === filterVal ? 'var(--primary)' : 'transparent',
+                  color: filterType === filterVal ? 'var(--on-primary)' : 'var(--on-surface-variant)',
+                  letterSpacing: '0.02em',
+                  border: 'none',
+                  cursor: 'pointer',
                 }}
               >
-                {t === "all" ? "Tout" : t === "income" ? "Revenus" : "Dépenses"}
+                {filterVal === 'all' ? t('filterAll') : filterVal === 'income' ? t('filterIncome') : t('filterExpense')}
               </button>
             ))}
           </div>
 
           {/* Category filter */}
           <div className="relative">
-            <label htmlFor="filter-category" className="sr-only">Filtrer par catégorie</label>
+            <label htmlFor="filter-category" className="sr-only">{t('filterCategory')}</label>
             <select
               id="filter-category"
               value={filterCategory}
               onChange={(e) => setFilterCategory(e.target.value)}
               className="rounded-xl pl-3 pr-8 py-2.5 text-xs font-bold outline-none appearance-none"
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
+                fontFamily: 'var(--font-manrope), sans-serif',
                 backgroundColor: filterCategory
-                  ? "var(--primary-container)"
-                  : "var(--surface-container-lowest)",
+                  ? 'var(--primary-container)'
+                  : 'var(--surface-container-lowest)',
                 color: filterCategory
-                  ? "var(--on-primary-container)"
-                  : "var(--on-surface-variant)",
-                border: "none",
+                  ? 'var(--on-primary-container)'
+                  : 'var(--on-surface-variant)',
+                border: 'none',
               }}
             >
-              <option value="">Catégorie</option>
+              <option value="">{t('filterCategory')}</option>
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>{c.name}</option>
               ))}
@@ -344,8 +367,8 @@ export default function TransactionsView({
               className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"
               style={{
                 color: filterCategory
-                  ? "var(--on-primary-container)"
-                  : "var(--on-surface-variant)",
+                  ? 'var(--on-primary-container)'
+                  : 'var(--on-surface-variant)',
               }}
             />
           </div>
@@ -354,8 +377,8 @@ export default function TransactionsView({
             <Loader2
               size={15}
               className="animate-spin shrink-0"
-              aria-label="Chargement"
-              style={{ color: "var(--primary)" }}
+              aria-label={t('loading')}
+              style={{ color: 'var(--primary)' }}
             />
           )}
         </div>
@@ -367,22 +390,22 @@ export default function TransactionsView({
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <div
               className="w-16 h-16 rounded-3xl mb-5 flex items-center justify-center"
-              style={{ backgroundColor: "var(--surface-container)" }}
+              style={{ backgroundColor: 'var(--surface-container)' }}
             >
-              <SlidersHorizontal size={22} style={{ color: "var(--on-surface-variant)" }} />
+              <SlidersHorizontal size={22} style={{ color: 'var(--on-surface-variant)' }} />
             </div>
             <p
               className="font-bold mb-2"
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
-                fontSize: "1rem",
-                color: "var(--on-surface)",
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '1rem',
+                color: 'var(--on-surface)',
               }}
             >
-              Aucune transaction trouvée
+              {t('noResults')}
             </p>
-            <p style={{ fontSize: "13px", color: "var(--on-surface-variant)" }}>
-              Modifiez vos filtres ou ajoutez une nouvelle transaction.
+            <p style={{ fontSize: '13px', color: 'var(--on-surface-variant)' }}>
+              {t('noResultsSub')}
             </p>
           </div>
         ) : (
@@ -396,35 +419,35 @@ export default function TransactionsView({
                   <div className="flex items-center gap-2.5">
                     <div
                       className="w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ backgroundColor: "var(--outline-variant)" }}
+                      style={{ backgroundColor: 'var(--outline-variant)' }}
                     />
                     <p
                       className="font-bold uppercase tracking-wider"
                       style={{
-                        fontSize: "10px",
-                        color: "var(--on-surface-variant)",
-                        fontFamily: "var(--font-manrope), sans-serif",
+                        fontSize: '10px',
+                        color: 'var(--on-surface-variant)',
+                        fontFamily: 'var(--font-manrope), sans-serif',
                       }}
                     >
-                      {formatDateLabel(date)}
+                      {formatDateLabel(date, locale)}
                     </p>
                   </div>
                   <span
                     className="font-bold font-numeric"
                     style={{
-                      fontSize: "11px",
-                      fontFamily: "var(--font-manrope), sans-serif",
-                      color: net >= 0 ? "var(--primary)" : "var(--error)",
+                      fontSize: '11px',
+                      fontFamily: 'var(--font-manrope), sans-serif',
+                      color: net >= 0 ? 'var(--primary)' : 'var(--error)',
                     }}
                   >
-                    {net >= 0 ? "+" : "−"} {formatMAD(Math.abs(net))} MAD
+                    {net >= 0 ? '+' : '−'} {formatMAD(Math.abs(net))} MAD
                   </span>
                 </div>
 
                 {/* Rows */}
                 <Card padding="none" overflow>
                   {txs.map((tx, rowIdx) => {
-                    const catName = tx.category_detail?.name ?? "";
+                    const catName = tx.category_detail?.name ?? '';
                     const cat = CATEGORY_ICONS[catName] ?? DEFAULT_ICON;
                     const Icon = cat.icon;
                     const amount = Math.abs(parseFloat(tx.amount));
@@ -435,16 +458,16 @@ export default function TransactionsView({
                         className="group flex items-center gap-4 px-5 py-4 transition-colors"
                         style={{
                           borderTop: rowIdx > 0
-                            ? "1px solid rgba(227,233,236,0.35)"
-                            : "none",
+                            ? '1px solid rgba(227,233,236,0.35)'
+                            : 'none',
                         }}
                         onMouseEnter={(e) => {
                           (e.currentTarget as HTMLElement).style.backgroundColor =
-                            "rgba(241,244,246,0.55)";
+                            'rgba(241,244,246,0.55)';
                         }}
                         onMouseLeave={(e) => {
                           (e.currentTarget as HTMLElement).style.backgroundColor =
-                            "transparent";
+                            'transparent';
                         }}
                       >
                         {/* Category color accent */}
@@ -452,8 +475,8 @@ export default function TransactionsView({
                           className="w-0.5 self-stretch rounded-full shrink-0"
                           style={{
                             backgroundColor:
-                              tx.category_detail?.color ?? "var(--outline-variant)",
-                            minHeight: "28px",
+                              tx.category_detail?.color ?? 'var(--outline-variant)',
+                            minHeight: '28px',
                             opacity: 0.7,
                           }}
                         />
@@ -467,7 +490,7 @@ export default function TransactionsView({
                         <div className="flex-1 min-w-0">
                           <p
                             className="text-sm font-bold truncate"
-                            style={{ color: "var(--on-surface)" }}
+                            style={{ color: 'var(--on-surface)' }}
                           >
                             {tx.label}
                           </p>
@@ -476,7 +499,7 @@ export default function TransactionsView({
                               <Badge variant="neutral" className="py-0">{catName}</Badge>
                             )}
                             <span
-                              style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}
+                              style={{ fontSize: '10px', color: 'var(--on-surface-variant)' }}
                             >
                               {tx.account_name}
                             </span>
@@ -488,32 +511,32 @@ export default function TransactionsView({
                           <p
                             className="font-bold text-sm font-numeric"
                             style={{
-                              fontFamily: "var(--font-manrope), sans-serif",
-                              color: tx.type === "income" ? "var(--primary)" : "var(--error)",
+                              fontFamily: 'var(--font-manrope), sans-serif',
+                              color: tx.type === 'income' ? 'var(--primary)' : 'var(--error)',
                             }}
                           >
-                            {tx.type === "income" ? "+" : "−"} {formatMAD(amount)}
+                            {tx.type === 'income' ? '+' : '−'} {formatMAD(amount)}
                             <span
                               className="font-normal ml-0.5"
-                              style={{ fontSize: "9px" }}
+                              style={{ fontSize: '9px' }}
                             >
                               MAD
                             </span>
                           </p>
-                          <p style={{ fontSize: "10px", color: "var(--on-surface-variant)" }}>
+                          <p style={{ fontSize: '10px', color: 'var(--on-surface-variant)' }}>
                             {tx.date}
                           </p>
                         </div>
 
                         {/* Actions */}
-                        <Button
-                          variant="ghost"
-                          aria-label={`Actions pour ${tx.label}`}
-                          className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-lg shrink-0"
-                          style={{ color: "var(--on-surface-variant)" }}
-                        >
-                          <MoreHorizontal size={14} />
-                        </Button>
+                        <ActionMenu
+                          isOpen={menuOpenId === tx.id}
+                          onToggle={() => setMenuOpenId(menuOpenId === tx.id ? null : tx.id)}
+                          onEdit={() => { setEditingTx(tx); setDrawerOpen(true); setMenuOpenId(null); }}
+                          onDelete={() => handleDelete(tx.id)}
+                          isDeleting={deletingId === tx.id}
+                          triggerAriaLabel={t('actionsFor', { label: tx.label })}
+                        />
                       </div>
                     );
                   })}
@@ -538,24 +561,24 @@ export default function TransactionsView({
               }}
               className="px-6 py-3 rounded-2xl"
               style={{
-                backgroundColor: "var(--surface-container)",
-                color: "var(--on-surface-variant)",
-                fontSize: "12px",
+                backgroundColor: 'var(--surface-container)',
+                color: 'var(--on-surface-variant)',
+                fontSize: '12px',
               }}
             >
-              Charger {total - transactions.length} transaction
-              {total - transactions.length !== 1 ? "s" : ""} de plus
+              {t('loadMore', { count: total - transactions.length })}
             </Button>
           </div>
         )}
       </div>
 
-      {/* ── Add Transaction Drawer ──────────────────────────────────────────── */}
+      {/* ── Add / Edit Transaction Drawer ──────────────────────────────────────── */}
       <AddTransactionDrawer
         open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
+        onClose={handleDrawerClose}
         accounts={accounts}
         categories={categories}
+        editTransaction={editingTx}
         onSuccess={() =>
           fetchData({ search, type: filterType, category: filterCategory, page: 1 })
         }

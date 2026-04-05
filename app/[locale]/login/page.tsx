@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useRouter, Link } from "@/i18n/navigation";
 import { login, setTokens, extractErrorMessage } from "@/lib/auth";
 
 // ── Shared primitives ────────────────────────────────────────────────────────
@@ -115,7 +115,7 @@ function BrandPanel() {
               fontWeight: 500,
             }}
           >
-            Finance Personnelle
+            Personal Finance
           </span>
         </div>
 
@@ -130,9 +130,9 @@ function BrandPanel() {
             marginBottom: "1.25rem",
           }}
         >
-          Le Grand
+          The
           <br />
-          Livre
+          Ledger
         </h1>
 
         <p
@@ -145,8 +145,7 @@ function BrandPanel() {
             maxWidth: "28ch",
           }}
         >
-          Votre atelier financier personnel — gérez, analysez et optimisez
-          votre patrimoine avec précision.
+          Your personal financial atelier — manage, analyse and optimise your wealth with precision.
         </p>
       </div>
 
@@ -201,8 +200,8 @@ function BrandPanel() {
 
         <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.25rem" }}>
           {[
-            { label: "Actifs totaux", value: "124 500 MAD" },
-            { label: "Croissance", value: "+18,4 %" },
+            { label: "Total assets", value: "124,500 MAD" },
+            { label: "Growth", value: "+18.4%" },
           ].map((stat) => (
             <div
               key={stat.label}
@@ -246,6 +245,7 @@ function BrandPanel() {
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function LoginPage() {
+  const t = useTranslations('auth.login');
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -261,7 +261,7 @@ export default function LoginPage() {
       setTokens(tokens.access, tokens.refresh);
       router.push("/dashboard");
     } catch (err) {
-      setError(extractErrorMessage(err, "Identifiants invalides"));
+      setError(extractErrorMessage(err, t('invalidCredentials')));
     } finally {
       setLoading(false);
     }
@@ -329,7 +329,7 @@ export default function LoginPage() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Connexion
+              {t('heading')}
             </h2>
             <p
               style={{
@@ -339,7 +339,7 @@ export default function LoginPage() {
                 margin: 0,
               }}
             >
-              Accédez à votre atelier financier
+              {t('subheading')}
             </p>
           </div>
 
@@ -364,15 +364,15 @@ export default function LoginPage() {
             )}
 
             <AuthInput
-              label="Nom d'utilisateur"
+              label={t('username')}
               value={username}
               onChange={setUsername}
-              placeholder="votre_nom"
+              placeholder="your_name"
               required
             />
 
             <AuthInput
-              label="Mot de passe"
+              label={t('password')}
               type="password"
               value={password}
               onChange={setPassword}
@@ -380,7 +380,7 @@ export default function LoginPage() {
               required
             />
 
-            <SubmitButton loading={loading} label="Se connecter" loadingLabel="Connexion…" />
+            <SubmitButton loading={loading} label={t('submit')} loadingLabel={t('submitting')} />
           </form>
 
           <p
@@ -392,7 +392,7 @@ export default function LoginPage() {
               fontFamily: "var(--font-inter), sans-serif",
             }}
           >
-            Pas encore de compte ?{" "}
+            {t('noAccount')}{" "}
             <Link
               href="/register"
               style={{
@@ -401,7 +401,7 @@ export default function LoginPage() {
                 fontWeight: 600,
               }}
             >
-              S'inscrire
+              {t('register')}
             </Link>
           </p>
         </div>

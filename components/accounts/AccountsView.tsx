@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 import { Plus, Pencil, Trash2, Building2 } from "lucide-react";
 import {
   ApiAccount,
@@ -33,6 +34,8 @@ function accentColor(id: string): string {
 type Props = { accounts: ApiAccount[] };
 
 export default function AccountsView({ accounts }: Props) {
+  const t = useTranslations('accounts');
+  const locale = useLocale();
   const router = useRouter();
   const [modalState, setModalState] = useState<{ open: boolean; account: ApiAccount | null }>({
     open: false,
@@ -91,7 +94,7 @@ export default function AccountsView({ accounts }: Props) {
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-end justify-between mb-6">
           <div>
-            <EyebrowLabel className="mb-2 block">Gestion financière</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('eyebrow')}</EyebrowLabel>
             <h1
               style={{
                 fontFamily: "var(--font-manrope), sans-serif",
@@ -101,12 +104,12 @@ export default function AccountsView({ accounts }: Props) {
                 lineHeight: 1.1,
               }}
             >
-              Comptes
+              {t('title')}
             </h1>
           </div>
           <Button variant="primary" size="md" onClick={openCreate}>
             <Plus size={15} />
-            Nouveau compte
+            {t('newAccount')}
           </Button>
         </div>
 
@@ -119,7 +122,7 @@ export default function AccountsView({ accounts }: Props) {
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-6">
               <div>
-                <EyebrowLabel light className="mb-2 block">Patrimoine total</EyebrowLabel>
+                <EyebrowLabel light className="mb-2 block">{t('totalWealth')}</EyebrowLabel>
                 {accounts.length === 0 ? (
                   <p
                     style={{
@@ -129,7 +132,7 @@ export default function AccountsView({ accounts }: Props) {
                       fontWeight: 500,
                     }}
                   >
-                    Ajoutez votre premier compte bancaire
+                    {t('addFirstAccount')}
                   </p>
                 ) : (
                   <div className="flex items-end gap-3">
@@ -162,10 +165,10 @@ export default function AccountsView({ accounts }: Props) {
                   >
                     {accounts.length}
                     <span style={{ fontSize: "10px", fontWeight: 500, marginLeft: "4px" }}>
-                      compte{accounts.length > 1 ? "s" : ""}
+                      {accounts.length > 1 ? "accounts" : "account"}
                     </span>
                   </p>
-                  <p style={{ fontSize: "11px", opacity: 0.65, marginTop: "2px" }}>actifs</p>
+                  <p style={{ fontSize: "11px", opacity: 0.65, marginTop: "2px" }}>{t('active')}</p>
                 </div>
               )}
             </div>
@@ -177,20 +180,22 @@ export default function AccountsView({ accounts }: Props) {
           <div className="grid grid-cols-3 gap-4 mb-6 anim-enter anim-delay-1">
             {[
               {
-                label: "Comptes actifs",
+                label: t('activeAccounts'),
                 value: accounts.length.toString(),
                 color: "var(--on-surface)",
                 isStatus: false,
               },
               {
-                label: "Solde total",
+                label: t('totalBalance'),
                 value: formatMAD(totalBalance),
                 suffix: "MAD",
                 color: totalBalance >= 0 ? "var(--primary)" : "var(--error)",
                 isStatus: false,
               },
               {
-                label: positiveCount === accounts.length ? "Tous en positif" : `${positiveCount} en positif`,
+                label: positiveCount === accounts.length
+                  ? t('allPositive')
+                  : t('positiveCount', { positive: positiveCount }),
                 value: positiveCount === accounts.length ? "✓" : `${positiveCount}/${accounts.length}`,
                 color: positiveCount === accounts.length ? "var(--primary)" : "#f59e0b",
                 isStatus: true,
@@ -226,7 +231,7 @@ export default function AccountsView({ accounts }: Props) {
       <div className="px-8 pb-12">
         {accounts.length > 0 && (
           <EyebrowLabel className="mb-5 block">
-            {accounts.length} compte{accounts.length > 1 ? "s" : ""} enregistré{accounts.length > 1 ? "s" : ""}
+            {t('accountsRegistered', { count: accounts.length })}
           </EyebrowLabel>
         )}
 
@@ -237,7 +242,7 @@ export default function AccountsView({ accounts }: Props) {
             const isNegative = balance < 0;
             const isDeleting = deletingId === account.id;
             const delayClass = `anim-delay-${Math.min(idx + 1, 6)}`;
-            const createdDate = new Date(account.created_at).toLocaleDateString("fr-MA", {
+            const createdDate = new Date(account.created_at).toLocaleDateString(locale, {
               day: "numeric",
               month: "long",
               year: "numeric",
@@ -279,18 +284,18 @@ export default function AccountsView({ accounts }: Props) {
                           {account.name}
                         </p>
                         <p style={{ fontSize: "10px", color: "var(--on-surface-variant)", marginTop: "2px" }}>
-                          Depuis {createdDate}
+                          {t('since', { date: createdDate })}
                         </p>
                       </div>
                     </div>
 
                     <Badge variant={isNegative ? "error" : "primary"} className="shrink-0">
-                      {isNegative ? "Déficit" : "Actif"}
+                      {isNegative ? t('deficit') : t('active')}
                     </Badge>
                   </div>
 
                   <div className="mb-5">
-                    <EyebrowLabel className="mb-1 block">Solde disponible</EyebrowLabel>
+                    <EyebrowLabel className="mb-1 block">{t('availableBalance')}</EyebrowLabel>
                     <p
                       className="font-black font-numeric"
                       style={{
@@ -321,7 +326,7 @@ export default function AccountsView({ accounts }: Props) {
                       style={{ color: "var(--on-surface-variant)", fontSize: "12px" }}
                     >
                       <Pencil size={12} />
-                      Modifier
+                      {t('edit')}
                     </Button>
                     <Button
                       variant="ghost"
@@ -332,7 +337,7 @@ export default function AccountsView({ accounts }: Props) {
                       style={{ color: "var(--error)", fontSize: "12px" }}
                     >
                       <Trash2 size={12} />
-                      {isDeleting ? "Suppression…" : "Supprimer"}
+                      {isDeleting ? t('deleting') : t('delete')}
                     </Button>
                   </div>
                 </div>
@@ -355,7 +360,7 @@ export default function AccountsView({ accounts }: Props) {
                 color: "var(--on-surface)",
               }}
             >
-              Aucun compte enregistré
+              {t('noAccounts')}
             </p>
             <p
               style={{
@@ -364,11 +369,11 @@ export default function AccountsView({ accounts }: Props) {
                 marginBottom: "1.5rem",
               }}
             >
-              Ajoutez vos comptes bancaires pour suivre votre patrimoine.
+              {t('noAccountsSub')}
             </p>
             <Button variant="primary" size="md" onClick={openCreate}>
               <Plus size={15} />
-              Ajouter un compte
+              {t('addAccount')}
             </Button>
           </div>
         )}

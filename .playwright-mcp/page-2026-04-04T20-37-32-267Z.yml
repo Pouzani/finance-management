@@ -1,0 +1,183 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e9]:
+          - heading "The Ledger" [level=1] [ref=e10]
+          - paragraph [ref=e11]: Premium Management
+      - navigation [ref=e12]:
+        - link "Dashboard" [ref=e13] [cursor=pointer]:
+          - /url: /en/dashboard
+          - img [ref=e14]
+          - generic [ref=e19]: Dashboard
+        - link "Transactions" [ref=e20] [cursor=pointer]:
+          - /url: /en/dashboard/transactions
+          - img [ref=e21]
+          - generic [ref=e24]: Transactions
+        - link "Budgets" [ref=e25] [cursor=pointer]:
+          - /url: /en/dashboard/budgets
+          - img [ref=e26]
+          - generic [ref=e29]: Budgets
+        - link "Goals" [ref=e30] [cursor=pointer]:
+          - /url: /en/dashboard/goals
+          - img [ref=e31]
+          - generic [ref=e35]: Goals
+        - link "Accounts" [ref=e36] [cursor=pointer]:
+          - /url: /en/dashboard/accounts
+          - img [ref=e37]
+          - generic [ref=e39]: Accounts
+        - link "Reports" [ref=e40] [cursor=pointer]:
+          - /url: /en/dashboard/reports
+          - img [ref=e41]
+          - generic [ref=e43]: Reports
+        - link "Settings" [ref=e44] [cursor=pointer]:
+          - /url: /en/dashboard/settings
+          - img [ref=e45]
+          - generic [ref=e48]: Settings
+      - button "+ Add Transaction" [ref=e50] [cursor=pointer]
+    - generic [ref=e51]:
+      - banner [ref=e52]:
+        - generic [ref=e54]:
+          - img [ref=e55]
+          - textbox "Search a transaction…" [ref=e58]
+        - generic [ref=e59]:
+          - generic [ref=e60]:
+            - button [ref=e61] [cursor=pointer]:
+              - img [ref=e62]
+            - button [ref=e66] [cursor=pointer]:
+              - img [ref=e67]
+            - button [ref=e70] [cursor=pointer]:
+              - img [ref=e71]
+          - generic [ref=e77] [cursor=pointer]:
+            - generic [ref=e78]:
+              - paragraph [ref=e79]: pouzanitest
+              - paragraph [ref=e80]: Plan Premium
+            - generic [ref=e81]: PO
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - paragraph [ref=e87]: Accounting
+              - heading "History" [level=1] [ref=e88]
+              - paragraph [ref=e89]: 2 transactions
+            - button "New Transaction" [ref=e90] [cursor=pointer]:
+              - img [ref=e91]
+              - text: New Transaction
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - paragraph [ref=e94]: Income
+              - generic [ref=e95]:
+                - paragraph [ref=e96]: + 32.000 MAD
+                - generic [ref=e97]: 2 loaded
+            - generic [ref=e98]:
+              - paragraph [ref=e99]: Expenses
+              - generic [ref=e100]:
+                - paragraph [ref=e101]: − 0 MAD
+                - generic [ref=e102]: 0 loaded
+            - generic [ref=e103]:
+              - paragraph [ref=e104]: Net Balance
+              - paragraph [ref=e106]: + 32.000 MAD
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - img [ref=e110]
+            - textbox "Search a transaction…" [ref=e113]
+          - group "Filter by type" [ref=e114]:
+            - button "All" [pressed] [ref=e115] [cursor=pointer]
+            - button "Income" [ref=e116] [cursor=pointer]
+            - button "Expenses" [ref=e117] [cursor=pointer]
+          - generic [ref=e118]:
+            - generic [ref=e119]: Category
+            - combobox "Category" [ref=e120]:
+              - option "Category" [selected]
+              - option "Abonnements"
+              - option "Alimentation"
+              - option "Cat 0"
+              - option "Cat 1"
+              - option "Cat 2"
+              - option "Éducation"
+              - option "Food"
+              - option "Food"
+              - option "Food"
+              - option "Food"
+              - option "Freelance"
+              - option "Logement"
+              - option "Loisirs"
+              - option "Remboursement"
+              - option "Salaire"
+              - option "Santé"
+              - option "Transport"
+              - option "Transport"
+            - img
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - paragraph [ref=e126]: Saturday, March 28, 2026
+            - generic [ref=e127]: + 32.000 MAD
+          - generic [ref=e128]:
+            - generic [ref=e129]:
+              - img [ref=e132]
+              - generic [ref=e134]:
+                - paragraph [ref=e135]: Salaire
+                - generic [ref=e136]:
+                  - generic [ref=e137]: Salaire
+                  - generic [ref=e138]: BOA
+              - generic [ref=e139]:
+                - paragraph [ref=e140]: + 16.500MAD
+                - paragraph [ref=e141]: 2026-03-28
+              - button "Actions for Salaire" [ref=e143] [cursor=pointer]:
+                - img [ref=e144]
+            - generic [ref=e148]:
+              - img [ref=e151]
+              - generic [ref=e153]:
+                - paragraph [ref=e154]: Salaire
+                - generic [ref=e155]:
+                  - generic [ref=e156]: Freelance
+                  - generic [ref=e157]: BOA
+              - generic [ref=e158]:
+                - paragraph [ref=e159]: + 15.500MAD
+                - paragraph [ref=e160]: 2026-03-28
+              - button "Actions for Salaire" [ref=e162] [cursor=pointer]:
+                - img [ref=e163]
+        - dialog "Edit Transaction" [ref=e223]:
+          - generic [ref=e168]:
+            - generic [ref=e169]:
+              - paragraph [ref=e170]: Edit
+              - heading "Edit Transaction" [level=2] [ref=e224]
+            - button "Close" [ref=e225] [cursor=pointer]:
+              - img [ref=e173]
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - button "Expense" [ref=e226] [cursor=pointer]
+              - button "Income" [pressed] [ref=e227] [cursor=pointer]
+            - generic [ref=e180]:
+              - paragraph [ref=e182]: Amount
+              - generic [ref=e183]:
+                - generic [ref=e184]: MAD
+                - textbox "Amount" [ref=e228]:
+                  - /placeholder: "0.00"
+                  - text: "16500"
+            - generic [ref=e186]:
+              - paragraph [ref=e188]: Label
+              - textbox "Label" [ref=e229]:
+                - /placeholder: e.g. Salary, Rent, Carrefour…
+                - text: Salaire
+            - generic [ref=e190]:
+              - paragraph [ref=e192]: Category
+              - generic [ref=e193]:
+                - combobox "Category" [ref=e230]:
+                  - option "Freelance"
+                  - option "Remboursement"
+                  - option "Salaire" [selected]
+                - img
+            - generic [ref=e195]:
+              - paragraph [ref=e197]: Account
+              - generic [ref=e198]:
+                - combobox "Account" [active] [ref=e231]:
+                  - option "BOA" [selected]
+                - img
+            - button "Save changes" [ref=e232] [cursor=pointer]:
+              - img [ref=e202]
+              - text: Save changes
+  - button "Open Next.js Dev Tools" [ref=e208] [cursor=pointer]:
+    - img [ref=e209]
+  - alert [ref=e212]

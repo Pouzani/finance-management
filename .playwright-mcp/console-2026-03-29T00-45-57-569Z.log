@@ -1,0 +1,154 @@
+[  312401ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10
+the name `formatDateLabel` is defined multiple times
+  39 | }
+  40 |
+> 41 | function formatDateLabel(dateStr: string): string {
+     |          ^^^^^^^^^^^^^^^
+  42 |   const d = new Date(dateStr + 'T00:00:00');
+  43 |   return d.toLocaleDateString('en-US', {
+  44 |     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/transactions/page.tsx @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  312713ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10
+the name `formatDateLabel` is defined multiple times
+  39 | }
+  40 |
+> 41 | function formatDateLabel(dateStr: string): string {
+     |          ^^^^^^^^^^^^^^^
+  42 |   const d = new Date(dateStr + 'T00:00:00');
+  43 |   return d.toLocaleDateString('en-US', {
+  44 |     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/transactions/page.tsx @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  312901ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10
+the name `formatDateLabel` is defined multiple times
+  39 | }
+  40 |
+> 41 | function formatDateLabel(dateStr: string): string {
+     |          ^^^^^^^^^^^^^^^
+  42 |   const d = new Date(dateStr + 'T00:00:00');
+  43 |   return d.toLocaleDateString('en-US', {
+  44 |     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/transactions/page.tsx @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:3272
+[  312903ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard?q=freelance&_rsc=lw73u:0
+[  312937ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/en/dashboard?q=freelance:0
+[  313022ms] Error: ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10
+the name `formatDateLabel` is defined multiple times
+  39 | }
+  40 |
+> 41 | function formatDateLabel(dateStr: string): string {
+     |          ^^^^^^^^^^^^^^^
+  42 |   const d = new Date(dateStr + 'T00:00:00');
+  43 |   return d.toLocaleDateString('en-US', {
+  44 |     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/transactions/page.tsx
+
+
+    at <unknown> (Error: ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10)
+    at Object.getCompilationErrors (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1189:59)
+    at DevBundlerService.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/mohamedriyadbouzani/Projects/FinanceManagement/finance-management/node_modules/next/dist/server/base-server.js:1745:26)
+[  313023ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10
+the name `formatDateLabel` is defined multiple times
+  39 | }
+  40 |
+> 41 | function formatDateLabel(dateStr: string): string {
+     |          ^^^^^^^^^^^^^^^
+  42 |   const d = new Date(dateStr + 'T00:00:00');
+  43 |   return d.toLocaleDateString('en-US', {
+  44 |     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/transactions/page.tsx @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  313071ms] [ERROR] ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx:41:10
+the name `formatDateLabel` is defined multiple times
+  39 | }
+  40 |
+> 41 | function formatDateLabel(dateStr: string): string {
+     |          ^^^^^^^^^^^^^^^
+  42 |   const d = new Date(dateStr + 'T00:00:00');
+  43 |   return d.toLocaleDateString('en-US', {
+  44 |     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+
+Ecmascript file had an error
+
+Import trace:
+  Server Component:
+    ./Projects/FinanceManagement/finance-management/components/transactions/TransactionsView.tsx
+    ./Projects/FinanceManagement/finance-management/app/[locale]/dashboard/transactions/page.tsx @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0x_lueq._.js:1945
+[  368841ms] ReferenceError: MoreHorizontal is not defined
+    at eval (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0ewtrdx._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:348:332)
+    at Array.map (<anonymous>)
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0ewtrdx._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:186:58)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9061:186)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10179:316)
+    at processRootScheduleInMicrotask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10200:106)
+    at http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10274:158
+[  374715ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10s5_next_dist_0ama5xk._.js:2431
+[  374735ms] ReferenceError: MoreHorizontal is not defined
+    at eval (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0ewtrdx._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:348:332)
+    at Array.map (<anonymous>)
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0ewtrdx._.js?id=%255Bproject%255D%252FProjects%252FFinanceManagement%252Ffinance-management%252Fcomponents%252Fdashboard%252FTransactionTable.tsx+%255Bapp-client%255D+%2528ecmascript%2529:186:58)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:2647:64)
+[  375453ms] ReferenceError: MoreHorizontal is not defined
+    at http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0ewtrdx._.js:1821:332
+    at Array.map (<anonymous>)
+    at TransactionTable (http://localhost:3000/_next/static/chunks/Projects_FinanceManagement_finance-management_0ewtrdx._.js:1659:58)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:6665:639)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_react-dom_0.y31de._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10s5_next_dist_compiled_0sjup09._.js:2647:64)

@@ -30,6 +30,13 @@ export type CategorySplit = {
   color: string;
 };
 
+export function formatDateLabel(dateStr: string, locale = 'en'): string {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString(locale, {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+
 export function formatMAD(amount: number): string {
   const abs = Math.abs(amount);
   const formatted = new Intl.NumberFormat("fr-MA", {

@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { Plus, Target } from "lucide-react";
-import { ApiGoal, createGoal, updateGoal, deleteGoal, type CreateGoalInput } from "@/lib/api";
-import { formatMAD } from "@/lib/data";
-import Button from "@/components/ui/Button";
-import EyebrowLabel from "@/components/ui/EyebrowLabel";
-import ProgressBar from "@/components/ui/ProgressBar";
-import GoalCard from "@/components/goals/GoalCard";
-import AddGoalModal from "@/components/goals/AddGoalModal";
+import { useState, useMemo } from 'react';
+import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
+import { Plus, Target } from 'lucide-react';
+import { ApiGoal, createGoal, updateGoal, deleteGoal, type CreateGoalInput } from '@/lib/api';
+import { formatMAD } from '@/lib/data';
+import Button from '@/components/ui/Button';
+import EyebrowLabel from '@/components/ui/EyebrowLabel';
+import ProgressBar from '@/components/ui/ProgressBar';
+import GoalCard from '@/components/goals/GoalCard';
+import AddGoalModal from '@/components/goals/AddGoalModal';
 
 type Props = { goals: ApiGoal[] };
 
@@ -18,6 +19,7 @@ function calcPct(current: number, target: number): number {
 }
 
 export default function GoalsView({ goals }: Props) {
+  const t = useTranslations('goals');
   const router = useRouter();
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
@@ -72,55 +74,55 @@ export default function GoalsView({ goals }: Props) {
       <div className="px-8 pt-8 pb-6">
         <div className="flex items-end justify-between mb-6">
           <div>
-            <EyebrowLabel className="mb-2 block">Patrimoine personnel</EyebrowLabel>
+            <EyebrowLabel className="mb-2 block">{t('eyebrow')}</EyebrowLabel>
             <h1
               style={{
-                fontFamily: "var(--font-manrope), sans-serif",
-                fontSize: "2rem",
+                fontFamily: 'var(--font-manrope), sans-serif',
+                fontSize: '2rem',
                 fontWeight: 900,
-                color: "var(--on-surface)",
+                color: 'var(--on-surface)',
                 lineHeight: 1.1,
               }}
             >
-              Objectifs
+              {t('title')}
             </h1>
           </div>
           <Button variant="primary" size="md" onClick={() => setShowAdd(true)}>
             <Plus size={15} />
-            Nouvel objectif
+            {t('newGoal')}
           </Button>
         </div>
 
         <div
           className="hero-card rounded-3xl p-8 mb-6 anim-enter"
-          style={{ color: "var(--on-primary)", minHeight: "180px" }}
+          style={{ color: 'var(--on-primary)', minHeight: '180px' }}
         >
           <div className="grain-overlay" />
           <div className="relative z-10">
             <div className="flex items-start justify-between mb-6">
               <div>
-                <EyebrowLabel light className="mb-2 block">Épargne totale</EyebrowLabel>
+                <EyebrowLabel light className="mb-2 block">{t('totalSavings')}</EyebrowLabel>
                 {totalTarget === 0 ? (
                   <p
                     style={{
-                      fontFamily: "var(--font-manrope), sans-serif",
-                      fontSize: "1rem",
+                      fontFamily: 'var(--font-manrope), sans-serif',
+                      fontSize: '1rem',
                       opacity: 0.7,
                       fontWeight: 500,
                     }}
                   >
-                    Créez votre premier objectif ci-dessous
+                    {t('createFirstGoal')}
                   </p>
                 ) : (
                   <div className="flex items-end gap-3">
                     <span
                       className="font-numeric font-black"
-                      style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "3.5rem", lineHeight: 1 }}
+                      style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '3.5rem', lineHeight: 1 }}
                     >
                       {formatMAD(totalSaved)}
                     </span>
-                    <span style={{ fontSize: "13px", opacity: 0.75, marginBottom: "10px" }}>
-                      MAD épargnés
+                    <span style={{ fontSize: '13px', opacity: 0.75, marginBottom: '10px' }}>
+                      {t('madSaved')}
                     </span>
                   </div>
                 )}
@@ -130,12 +132,12 @@ export default function GoalsView({ goals }: Props) {
                 <div className="text-right">
                   <p
                     className="font-bold font-numeric"
-                    style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "1.25rem", color: "rgba(255,255,255,0.95)" }}
+                    style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)' }}
                   >
-                    {formatMAD(totalTarget)}{" "}
-                    <span style={{ fontSize: "10px", fontWeight: 500 }}>MAD</span>
+                    {formatMAD(totalTarget)}{' '}
+                    <span style={{ fontSize: '10px', fontWeight: 500 }}>MAD</span>
                   </p>
-                  <p style={{ fontSize: "11px", opacity: 0.65, marginTop: "2px" }}>objectif total</p>
+                  <p style={{ fontSize: '11px', opacity: 0.65, marginTop: '2px' }}>{t('totalGoal')}</p>
                 </div>
               )}
             </div>
@@ -149,9 +151,9 @@ export default function GoalsView({ goals }: Props) {
                   className="mb-2"
                 />
                 <div className="flex justify-between">
-                  <span style={{ fontSize: "10px", opacity: 0.6 }}>{overallPct}% atteint</span>
-                  <span style={{ fontSize: "10px", opacity: 0.6 }}>
-                    {formatMAD(Math.max(0, totalTarget - totalSaved))} MAD restants
+                  <span style={{ fontSize: '10px', opacity: 0.6 }}>{t('reached', { pct: overallPct })}</span>
+                  <span style={{ fontSize: '10px', opacity: 0.6 }}>
+                    {t('remaining', { amount: formatMAD(Math.max(0, totalTarget - totalSaved)) })}
                   </span>
                 </div>
               </div>
@@ -162,23 +164,23 @@ export default function GoalsView({ goals }: Props) {
         {goals.length > 0 && (
           <div className="grid grid-cols-3 gap-4 mb-6 anim-enter anim-delay-1">
             {[
-              { label: "Objectifs actifs", value: goals.length.toString(), color: "var(--on-surface)" },
-              { label: "Complétés", value: completedCount.toString(), color: "var(--primary)" },
+              { label: t('activeGoals'), value: goals.length.toString(), color: 'var(--on-surface)' },
+              { label: t('completed'), value: completedCount.toString(), color: 'var(--primary)' },
               {
-                label: "Progression moy.",
+                label: t('avgProgress'),
                 value: `${overallPct}%`,
-                color: overallPct >= 75 ? "var(--primary)" : overallPct >= 40 ? "#f59e0b" : "var(--on-surface-variant)",
+                color: overallPct >= 75 ? 'var(--primary)' : overallPct >= 40 ? '#f59e0b' : 'var(--on-surface-variant)',
               },
             ].map(({ label, value, color }) => (
               <div
                 key={label}
                 className="rounded-2xl p-4"
-                style={{ backgroundColor: "var(--surface-container-lowest)", boxShadow: "0px 4px 16px rgba(43,52,55,0.05)" }}
+                style={{ backgroundColor: 'var(--surface-container-lowest)', boxShadow: '0px 4px 16px rgba(43,52,55,0.05)' }}
               >
                 <EyebrowLabel className="mb-2 block">{label}</EyebrowLabel>
                 <p
                   className="font-bold font-numeric leading-none"
-                  style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "1.5rem", color }}
+                  style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '1.5rem', color }}
                 >
                   {value}
                 </p>
@@ -191,7 +193,7 @@ export default function GoalsView({ goals }: Props) {
       <div className="px-8 pb-12">
         {goals.length > 0 && (
           <EyebrowLabel className="mb-5 block">
-            {goals.length} objectif{goals.length > 1 ? "s" : ""} en cours
+            {t('goalsInProgress', { count: goals.length })}
           </EyebrowLabel>
         )}
 
@@ -211,21 +213,21 @@ export default function GoalsView({ goals }: Props) {
         {goals.length === 0 && (
           <div
             className="flex flex-col items-center justify-center py-24 text-center rounded-3xl anim-enter"
-            style={{ backgroundColor: "var(--surface-container-lowest)" }}
+            style={{ backgroundColor: 'var(--surface-container-lowest)' }}
           >
-            <Target size={36} className="mb-4" style={{ color: "var(--outline-variant)" }} />
+            <Target size={36} className="mb-4" style={{ color: 'var(--outline-variant)' }} />
             <p
               className="font-bold mb-2"
-              style={{ fontFamily: "var(--font-manrope), sans-serif", fontSize: "1rem", color: "var(--on-surface)" }}
+              style={{ fontFamily: 'var(--font-manrope), sans-serif', fontSize: '1rem', color: 'var(--on-surface)' }}
             >
-              Aucun objectif défini
+              {t('noGoals')}
             </p>
-            <p style={{ fontSize: "13px", color: "var(--on-surface-variant)", marginBottom: "1.5rem" }}>
-              Créez votre premier objectif d&apos;épargne pour commencer.
+            <p style={{ fontSize: '13px', color: 'var(--on-surface-variant)', marginBottom: '1.5rem' }}>
+              {t('noGoalsSub')}
             </p>
             <Button variant="primary" size="md" onClick={() => setShowAdd(true)}>
               <Plus size={15} />
-              Créer un objectif
+              {t('createGoal')}
             </Button>
           </div>
         )}

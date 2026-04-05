@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Check, Plus } from "lucide-react";
-import { ApiAccount, ApiCategory, createTransaction } from "@/lib/api";
-import Card from "@/components/ui/Card";
-import SectionHeader from "@/components/ui/SectionHeader";
-import EyebrowLabel from "@/components/ui/EyebrowLabel";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
+import { useState } from 'react';
+import { useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
+import { Check, Plus } from 'lucide-react';
+import { ApiAccount, ApiCategory, createTransaction } from '@/lib/api';
+import Card from '@/components/ui/Card';
+import SectionHeader from '@/components/ui/SectionHeader';
+import EyebrowLabel from '@/components/ui/EyebrowLabel';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 type Props = {
   accounts: ApiAccount[];
@@ -16,12 +17,14 @@ type Props = {
 };
 
 export default function QuickTransaction({ accounts, categories }: Props) {
+  const t = useTranslations('transactions');
+  const tDash = useTranslations('dashboard');
   const router = useRouter();
-  const [type, setType] = useState<"expense" | "income">("expense");
-  const [amount, setAmount] = useState("");
-  const [label, setLabel] = useState("");
-  const [categoryId, setCategoryId] = useState(categories[0]?.id ?? "");
-  const [accountId, setAccountId] = useState(accounts[0]?.id ?? "");
+  const [type, setType] = useState<'expense' | 'income'>('expense');
+  const [amount, setAmount] = useState('');
+  const [label, setLabel] = useState('');
+  const [categoryId, setCategoryId] = useState(categories[0]?.id ?? '');
+  const [accountId, setAccountId] = useState(accounts[0]?.id ?? '');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -33,23 +36,23 @@ export default function QuickTransaction({ accounts, categories }: Props) {
 
     const parsed = parseFloat(amount);
     if (!amount || isNaN(parsed) || parsed <= 0) {
-      setError("Veuillez saisir un montant valide.");
+      setError(t('errorAmount'));
       return;
     }
     if (!label.trim()) {
-      setError("Veuillez saisir un libellé.");
+      setError(t('errorLabel'));
       return;
     }
     if (!accountId) {
-      setError("Veuillez sélectionner un compte.");
+      setError(t('errorAccount'));
       return;
     }
     if (!categoryId) {
-      setError("Veuillez sélectionner une catégorie.");
+      setError(t('errorCategory'));
       return;
     }
 
-    const signedAmount = type === "expense" ? -Math.abs(parsed) : Math.abs(parsed);
+    const signedAmount = type === 'expense' ? -Math.abs(parsed) : Math.abs(parsed);
     const today = new Date().toISOString().slice(0, 10);
 
     setSubmitting(true);
@@ -62,15 +65,15 @@ export default function QuickTransaction({ accounts, categories }: Props) {
         account: accountId,
         category: categoryId,
       });
-      setAmount("");
-      setLabel("");
+      setAmount('');
+      setLabel('');
       router.refresh();
     } catch (err) {
       const msg =
-        typeof err === "object" && err !== null && "non_field_errors" in err
+        typeof err === 'object' && err !== null && 'non_field_errors' in err
           ? (err as Record<string, string[]>).non_field_errors?.[0]
-          : "Une erreur est survenue.";
-      setError(msg ?? "Une erreur est survenue.");
+          : t('errorGeneric');
+      setError(msg ?? t('errorGeneric'));
     } finally {
       setSubmitting(false);
     }
@@ -78,25 +81,25 @@ export default function QuickTransaction({ accounts, categories }: Props) {
 
   return (
     <Card padding="md">
-      <SectionHeader title="Transaction Rapide" className="mb-6" />
+      <SectionHeader title={tDash('quickTransaction')} className="mb-6" />
 
       <form className="space-y-4" onSubmit={handleSubmit}>
         {/* Label */}
         <div>
-          <EyebrowLabel className="mb-2 block">Libellé</EyebrowLabel>
+          <EyebrowLabel className="mb-2 block">{t('quickLabel')}</EyebrowLabel>
           <Input
             type="text"
-            placeholder="Ex: Loyer, Salaire…"
+            placeholder={t('quickLabelPlaceholder')}
             value={label}
             onChange={(e) => setLabel(e.target.value)}
             className="w-full text-sm"
-            style={{ backgroundColor: "var(--surface-container-highest)", border: "none", padding: "12px" }}
+            style={{ backgroundColor: 'var(--surface-container-highest)', border: 'none', padding: '12px' }}
           />
         </div>
 
         {/* Amount */}
         <div>
-          <EyebrowLabel className="mb-2 block">Montant (MAD)</EyebrowLabel>
+          <EyebrowLabel className="mb-2 block">{t('quickAmount')}</EyebrowLabel>
           <Input
             type="text"
             placeholder="0.00"
@@ -104,48 +107,48 @@ export default function QuickTransaction({ accounts, categories }: Props) {
             onChange={(e) => setAmount(e.target.value)}
             className="w-full font-black text-right font-numeric"
             style={{
-              fontFamily: "var(--font-manrope), sans-serif",
-              backgroundColor: "var(--surface-container-highest)",
-              border: "none",
-              fontSize: "24px",
-              padding: "16px",
+              fontFamily: 'var(--font-manrope), sans-serif',
+              backgroundColor: 'var(--surface-container-highest)',
+              border: 'none',
+              fontSize: '24px',
+              padding: '16px',
             }}
           />
         </div>
 
         {/* Type toggle */}
         <div className="grid grid-cols-2 gap-3">
-          {(["expense", "income"] as const).map((t) => (
+          {(['expense', 'income'] as const).map((txType) => (
             <Button
-              key={t}
+              key={txType}
               type="button"
               variant="ghost"
               size="sm"
               onClick={() => {
-                setType(t);
-                setCategoryId(categories.find((c) => c.type === t)?.id ?? "");
+                setType(txType);
+                setCategoryId(categories.find((c) => c.type === txType)?.id ?? '');
               }}
               style={{
-                backgroundColor: type === t ? "var(--primary)" : "var(--surface-container-highest)",
-                color: type === t ? "var(--on-primary)" : "var(--on-surface-variant)",
-                borderRadius: "8px",
-                width: "100%",
-                justifyContent: "center",
+                backgroundColor: type === txType ? 'var(--primary)' : 'var(--surface-container-highest)',
+                color: type === txType ? 'var(--on-primary)' : 'var(--on-surface-variant)',
+                borderRadius: '8px',
+                width: '100%',
+                justifyContent: 'center',
               }}
             >
-              {t === "expense" ? "Dépense" : "Revenu"}
+              {t(`type.${txType}`)}
             </Button>
           ))}
         </div>
 
         {/* Category */}
         <div>
-          <EyebrowLabel className="mb-2 block">Catégorie</EyebrowLabel>
+          <EyebrowLabel className="mb-2 block">{t('category')}</EyebrowLabel>
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
             className="w-full rounded-xl p-3 text-xs font-medium outline-none appearance-none"
-            style={{ backgroundColor: "var(--surface-container-highest)", border: "none", color: "var(--on-surface)" }}
+            style={{ backgroundColor: 'var(--surface-container-highest)', border: 'none', color: 'var(--on-surface)' }}
           >
             {filteredCategories.map((c) => (
               <option key={c.id} value={c.id}>{c.name}</option>
@@ -155,12 +158,12 @@ export default function QuickTransaction({ accounts, categories }: Props) {
 
         {/* Account */}
         <div>
-          <EyebrowLabel className="mb-2 block">Compte</EyebrowLabel>
+          <EyebrowLabel className="mb-2 block">{t('account')}</EyebrowLabel>
           <select
             value={accountId}
             onChange={(e) => setAccountId(e.target.value)}
             className="w-full rounded-xl p-3 text-xs font-medium outline-none appearance-none"
-            style={{ backgroundColor: "var(--surface-container-highest)", border: "none", color: "var(--on-surface)" }}
+            style={{ backgroundColor: 'var(--surface-container-highest)', border: 'none', color: 'var(--on-surface)' }}
           >
             {accounts.map((a) => (
               <option key={a.id} value={a.id}>{a.name}</option>
@@ -169,7 +172,7 @@ export default function QuickTransaction({ accounts, categories }: Props) {
         </div>
 
         {error && (
-          <p className="text-xs" style={{ color: "var(--error)" }}>{error}</p>
+          <p className="text-xs" style={{ color: 'var(--error)' }}>{error}</p>
         )}
 
         <Button
@@ -178,14 +181,14 @@ export default function QuickTransaction({ accounts, categories }: Props) {
           size="lg"
           loading={submitting}
           disabled={submitting}
-          style={{ width: "100%", justifyContent: "center", borderRadius: "1rem" }}
+          style={{ width: '100%', justifyContent: 'center', borderRadius: '1rem' }}
         >
           {submitting ? (
-            "Enregistrement…"
+            t('saving')
           ) : (
             <>
               <Plus size={14} strokeWidth={2.5} />
-              Enregistrer l&apos;opération
+              {t('save')}
             </>
           )}
         </Button>
