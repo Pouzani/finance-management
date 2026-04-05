@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { Bell, Search, Globe, RefreshCw } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import Button from '@/components/ui/Button';
@@ -65,18 +65,6 @@ export default function TopBar() {
         </div>
       </div>
       <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          <Button variant="icon" className="relative" style={{ color: 'var(--on-surface-variant)' }}>
-            <Bell size={20} strokeWidth={1.8} />
-            <span className="absolute top-2 right-2 w-2 h-2 rounded-full border-2" style={{ backgroundColor: 'var(--error)', borderColor: '#f8fafc' }} />
-          </Button>
-          <Button variant="icon" style={{ color: 'var(--on-surface-variant)' }}>
-            <Globe size={20} strokeWidth={1.8} />
-          </Button>
-          <Button variant="icon" style={{ color: 'var(--on-surface-variant)' }}>
-            <RefreshCw size={20} strokeWidth={1.8} />
-          </Button>
-        </div>
         <div className="h-8 w-px" style={{ backgroundColor: 'rgba(171,179,183,0.3)' }} />
         <div className="flex items-center gap-3 cursor-pointer group">
           <div className="text-right hidden sm:block">
